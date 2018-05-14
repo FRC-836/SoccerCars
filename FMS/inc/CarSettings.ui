@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Diagnostics</class>
- <widget class="QWidget" name="Diagnostics">
+ <class>CarSettings</class>
+ <widget class="QWidget" name="CarSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
