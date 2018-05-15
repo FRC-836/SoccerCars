@@ -16,9 +16,11 @@ private:
   //member variables
   Ui_MainMenu* ui;
   std::unique_ptr<QTimer> m_tmrMatchTimer;
+  std::unique_ptr<QTimer> m_tmrSecondTimer;
 
   //private functions
-  void stopMatch();
+  void stopMatch(bool hasWinner);
+  void startMatch();
 
 public:
   //constructors
@@ -31,10 +33,12 @@ signals:
   void destroyed();
 
 public slots:
-  //void btnMatchSettingsClickHandler();
-  //void btnCarSettingsClickHandler();
-  //void btnStartStopClickHandler();
-  //void btnDiagnosticsClickHandler();
+  void btnMatchSettingsClickHandler();
+  void btnCarSettingsClickHandler();
+  void btnStartStopClickHandler();
+  void btnDiagnosticsClickHandler();
+  void tmrMatchTimerTimeoutHandler();
+  void tmrSecondTimerTimeoutHandler();
 
 };
 
