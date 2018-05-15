@@ -31,10 +31,10 @@ signals:
   void destroyed();
 
 public slots:
-  void btnMatchSettingsClickHandler();
-  void btnCarSettingsClickHandler();
-  void btnStartStopClickHandler();
-  void btnDiagnosticsClickHandler();
+  //void btnMatchSettingsClickHandler();
+  //void btnCarSettingsClickHandler();
+  //void btnStartStopClickHandler();
+  //void btnDiagnosticsClickHandler();
 
 };
 
