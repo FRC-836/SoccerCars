@@ -3,15 +3,18 @@
 
 #include <qwidget.h>
 
-#include "ui_Connect.h"
+#include "ui_CarSettings.h"
 
-class Connect : public QWidget
+class CarSettings : public QWidget
 {
   Q_OBJECT
 
 private:
+  Ui_CarSettings* m_ui;
 
 public:
+  CarSettings(QWidget* parent = nullptr);
+  ~CarSettings();
 
 signals:
 

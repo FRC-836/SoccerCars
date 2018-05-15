@@ -39,21 +39,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_SYSTEM_NAME}${ARC
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_SYSTEM_NAME}${ARCH}/lib)
 
 set(src src/main.cpp
-        src/Connect.cpp
+        src/CarSettings.cpp
         src/Diagnostics.cpp
         src/MainMenu.cpp
         src/MatchSettings.cpp
         src/StopCar.cpp
         )
         
-set(inc inc/Connect.h
+set(inc inc/CarSettings.h
         inc/Diagnostics.h
         inc/MainMenu.h
         inc/MatchSettings.h
         inc/StopCar.h
         )
         
-set(forms inc/Connect.ui
+set(forms inc/CarSettings.ui
           inc/Diagnostics.ui
           inc/MainMenu.ui
           inc/MatchSettings.ui

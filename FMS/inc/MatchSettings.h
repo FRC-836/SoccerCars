@@ -10,8 +10,11 @@ class MatchSettings : public QWidget
   Q_OBJECT
 
 private:
+  Ui_MatchSettings* m_ui;
 
 public:
+  MatchSettings(QWidget* parent = nullptr);
+  ~MatchSettings();
 
 signals:
 

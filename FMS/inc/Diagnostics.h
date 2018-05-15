@@ -10,8 +10,11 @@ class Diagnostics : public QWidget
   Q_OBJECT
 
 private:
+  Ui_Diagnostics* m_ui;
 
 public:
+  Diagnostics(QWidget* parent = nullptr);
+  ~Diagnostics();
 
 signals:
 

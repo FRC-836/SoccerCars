@@ -10,8 +10,11 @@ class StopCar : public QWidget
   Q_OBJECT
 
 private:
+  Ui_EmergencyCarStop* m_ui;
   
 public:
+  StopCar(QWidget* parent = nullptr);
+  ~StopCar();
 
 signals:
 
