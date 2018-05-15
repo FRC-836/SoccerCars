@@ -1,0 +1,16 @@
+FIELD_NAME,NPUT_OR_OUTPUT,DATA_TYPE,DATA_ORIGIN_PROGRAM,BYTE_NUMBER,START_BIT,BIT_SIZE
+A,INPUT,boolean,FMS,0,0,1
+B,INPUT,boolean,FMS,0,1,1
+X,INPUT,boolean,FMS,0,2,1
+Y,INPUT,boolean,FMS,0,3,1
+LB,INPUT,boolean,FMS,0,4,1
+LT,INPUT,boolean,FMS,0,5,1
+RB,INPUT,boolean,FMS,0,6,1
+RT,INPUT,boolean,FMS,0,7,1
+Back,INPUT,boolean,FMS,1,0,1
+Start,INPUT,boolean,FMS,1,1,1
+D-Pad,INPUT,int,FMS,2,0,8
+Opponent Scores,INPUT,int,FMS,3,0,8
+Ally Scores,INPUT,int,FMS,4,0,8
+L Joystick,INPUT,double,FMS,5,0,16
+R Joystick,INPUT,double,FMS,6,0,16
