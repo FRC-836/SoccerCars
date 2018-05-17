@@ -1,0 +1,9 @@
+design settings file for use of loading matches
+design network infrustructure for communicating with the cars and field
+classes to create
+  car diag widget
+  car comm thread/program
+  controller handler
+  cmd options
+  
+add output manager as submodule

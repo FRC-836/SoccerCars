@@ -1,10 +1,10 @@
 #include "MainMenu.h"
 
 //private functions
-void stopMatch(bool hasWinner)
+void MainMenu::stopMatch(bool hasWinner)
 {
 }
-void startMatch()
+void MainMenu::startMatch()
 {
 }
 
