@@ -18,6 +18,9 @@ set(CMAKE_AUTOUIC_OPTIONS -o inc/)
 #Find the QtWidgets library
 find_package(Qt5Widgets)
 
+#dependencies
+add_subdirectory(deps/OutputManager_qt)
+
 #configure output directories
 if(WIN32)
   if(CMAKE_CL_64)
