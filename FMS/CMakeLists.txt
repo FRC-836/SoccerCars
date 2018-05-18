@@ -66,9 +66,10 @@ set(forms inc/CarSettings.ui
 #setup inc as a valid include directory
 include_directories(${CMAKE_SOURCE_DIR}/Inc
                     ${CMAKE_CURRENT_BINARY_DIR})
-
+                    
 #create executable
 add_executable(${PROJECT_NAME} ${src} ${inc} ${forms})
 
 #use the widgets moduole from Qt 5
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} OutputManager_Qt
+                      Qt5::Widgets)
