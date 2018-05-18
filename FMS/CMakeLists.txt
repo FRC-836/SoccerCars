@@ -47,6 +47,7 @@ set(src src/main.cpp
         src/MainMenu.cpp
         src/MatchSettings.cpp
         src/StopCar.cpp
+        src/CmdOptions.cpp
         )
         
 set(inc inc/CarSettings.h
@@ -54,6 +55,8 @@ set(inc inc/CarSettings.h
         inc/MainMenu.h
         inc/MatchSettings.h
         inc/StopCar.h
+        inc/CmdOptions.h
+        inc/MatchOptions.h
         )
         
 set(forms inc/CarSettings.ui
