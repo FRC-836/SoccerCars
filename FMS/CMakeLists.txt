@@ -68,7 +68,9 @@ set(forms inc/CarSettings.ui
 
 #setup inc as a valid include directory
 include_directories(${CMAKE_SOURCE_DIR}/Inc
-                    ${CMAKE_CURRENT_BINARY_DIR})
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_SOURCE_DIR}/deps/OutputManager_qt/inc
+                    )
                     
 #create executable
 add_executable(${PROJECT_NAME} ${src} ${inc} ${forms})
