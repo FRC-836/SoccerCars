@@ -3,6 +3,18 @@
 extern OutputManager cout;
 
 //private functions
+void MainMenu::makeConnections()
+{
+  //ui connections
+  connect(m_ui->btnStartStop, &QPushButton::clicked, this, &MainMenu::btnStartStopClickHandler);
+  connect(m_ui->btnCarSettings, &QPushButton::clicked, this, &MainMenu::btnCarSettingsClickHandler);
+  connect(m_ui->btnDiag, &QPushButton::clicked, this, &MainMenu::btnDiagnosticsClickHandler);
+  connect(m_ui->btnMatchSettings, &QPushButton::clicked, this, &MainMenu::btnCarSettingsClickHandler);
+
+  //timer connections
+  connect(m_tmrMatchTimer.get(), &QTimer::timeout, this, &MainMenu::tmrMatchTimerTimeoutHandler);
+  connect(m_tmrSecondTimer.get(), &QTimer::timeout, this, &MainMenu::tmrSecondTimerTimeoutHandler);
+}
 void MainMenu::stopMatch(bool hasWinner)
 {
   //update button text
@@ -19,6 +31,8 @@ MainMenu::MainMenu()
 {
   m_ui = new Ui_MainMenu();
   m_ui->setupUi(this);
+
+  makeConnections();
 }
 MainMenu::~MainMenu()
 {

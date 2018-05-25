@@ -22,6 +22,7 @@ private:
   std::shared_ptr<MatchOptions> m_matchSettings;
 
   //private functions
+  void makeConnections();
   void stopMatch(bool hasWinner);
   void startMatch();
 
