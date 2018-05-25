@@ -16,7 +16,7 @@ class MainMenu : public QMainWindow
 
 private:
   //member variables
-  Ui_MainMenu* ui;
+  Ui_MainMenu* m_ui;
   std::unique_ptr<QTimer> m_tmrMatchTimer;
   std::unique_ptr<QTimer> m_tmrSecondTimer;
   std::shared_ptr<MatchOptions> m_matchSettings;

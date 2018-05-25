@@ -11,12 +11,12 @@ void MainMenu::startMatch()
 //constructors
 MainMenu::MainMenu()
 {
-  ui = new Ui_MainMenu();
-  ui->setupUi(this);
+  m_ui = new Ui_MainMenu();
+  m_ui->setupUi(this);
 }
 MainMenu::~MainMenu()
 {
-  delete ui;
+  delete m_ui;
 }
 
 //public functions
