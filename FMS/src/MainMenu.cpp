@@ -5,9 +5,13 @@ extern OutputManager cout;
 //private functions
 void MainMenu::stopMatch(bool hasWinner)
 {
+  //update button text
+  m_ui->btnStartStop->setText("Start Match");
 }
 void MainMenu::startMatch()
 {
+  //update button text
+  m_ui->btnStartStop->setText("Stop Match");
 }
 
 //constructors
