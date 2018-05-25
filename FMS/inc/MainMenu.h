@@ -7,6 +7,8 @@
 #include <qtimer.h>
 
 #include "ui_MainMenu.h"
+#include "CmdOptions.h"
+#include "MatchOptions.h"
 
 class MainMenu : public QMainWindow
 {
@@ -17,6 +19,7 @@ private:
   Ui_MainMenu* ui;
   std::unique_ptr<QTimer> m_tmrMatchTimer;
   std::unique_ptr<QTimer> m_tmrSecondTimer;
+  std::shared_ptr<MatchOptions> m_matchSettings;
 
   //private functions
   void stopMatch(bool hasWinner);
@@ -39,7 +42,6 @@ public slots:
   void btnDiagnosticsClickHandler();
   void tmrMatchTimerTimeoutHandler();
   void tmrSecondTimerTimeoutHandler();
-
 };
 
 #endif
