@@ -48,6 +48,7 @@ set(src src/main.cpp
         src/MatchSettings.cpp
         src/StopCar.cpp
         src/CmdOptions.cpp
+        src/MatchOptions.cpp
         )
         
 set(inc inc/CarSettings.h
