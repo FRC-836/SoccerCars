@@ -19,11 +19,17 @@ void MainMenu::stopMatch(bool hasWinner)
 {
   //update button text
   m_ui->btnStartStop->setText("Start Match");
+
+  //this should maybe be the first thing done in this function, but its last for now
+  m_matchRunning = false;
 }
 void MainMenu::startMatch()
 {
   //update button text
   m_ui->btnStartStop->setText("Stop Match");
+
+  //this should be the last thing done in this function
+  m_matchRunning = true;
 }
 
 //constructors
@@ -35,6 +41,10 @@ MainMenu::MainMenu()
   //make timers
   m_tmrMatchTimer = new QTimer(this);
   m_tmrSecondTimer = new QTimer(this);
+
+  //initialize variables
+  m_matchSettings = std::make_shared<MatchOptions>();
+  m_matchRunning = false;
 
   makeConnections();
 }
@@ -52,6 +62,8 @@ void MainMenu::btnMatchSettingsClickHandler()
   {
     cout << "INFO: MainMenu: match settings button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //TODO: add call to match settings editor window
 }
 void MainMenu::btnCarSettingsClickHandler()
 {
@@ -59,6 +71,8 @@ void MainMenu::btnCarSettingsClickHandler()
   {
     cout << "INFO: MainMenu: car settings button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //TODO: add call to car settings editor window
 }
 void MainMenu::btnStartStopClickHandler()
 {
@@ -66,6 +80,15 @@ void MainMenu::btnStartStopClickHandler()
   {
     cout << "INFO: MainMenu: " <<  m_ui->btnStartStop->text() << " button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  if (m_matchRunning)
+  {
+    stopMatch(false);
+  } //end  if (m_matchRunning)
+  else
+  {
+    startMatch();
+  } //end  else
 }
 void MainMenu::btnDiagnosticsClickHandler()
 {
@@ -73,6 +96,8 @@ void MainMenu::btnDiagnosticsClickHandler()
   {
     cout << "INFO: MainMenu: diagnostics button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //TODO: add call to diagnostics window
 }
 void MainMenu::tmrMatchTimerTimeoutHandler()
 {

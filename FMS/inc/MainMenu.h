@@ -21,6 +21,7 @@ private:
   QPointer<QTimer> m_tmrMatchTimer;
   QPointer<QTimer> m_tmrSecondTimer;
   std::shared_ptr<MatchOptions> m_matchSettings;
+  bool m_matchRunning;
 
   //private functions
   void makeConnections();
