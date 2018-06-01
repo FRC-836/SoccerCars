@@ -5,6 +5,7 @@
 
 #include <qmainwindow.h>
 #include <qtimer.h>
+#include <qpointer.h>
 
 #include "ui_MainMenu.h"
 #include "CmdOptions.h"
@@ -17,8 +18,8 @@ class MainMenu : public QMainWindow
 private:
   //member variables
   Ui_MainMenu* m_ui;
-  std::unique_ptr<QTimer> m_tmrMatchTimer;
-  std::unique_ptr<QTimer> m_tmrSecondTimer;
+  QPointer<QTimer> m_tmrMatchTimer;
+  QPointer<QTimer> m_tmrSecondTimer;
   std::shared_ptr<MatchOptions> m_matchSettings;
 
   //private functions

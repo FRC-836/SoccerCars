@@ -12,8 +12,8 @@ void MainMenu::makeConnections()
   connect(m_ui->btnMatchSettings, &QPushButton::clicked, this, &MainMenu::btnCarSettingsClickHandler);
 
   //timer connections
-  connect(m_tmrMatchTimer.get(), &QTimer::timeout, this, &MainMenu::tmrMatchTimerTimeoutHandler);
-  connect(m_tmrSecondTimer.get(), &QTimer::timeout, this, &MainMenu::tmrSecondTimerTimeoutHandler);
+  connect(m_tmrMatchTimer, &QTimer::timeout, this, &MainMenu::tmrMatchTimerTimeoutHandler);
+  connect(m_tmrSecondTimer, &QTimer::timeout, this, &MainMenu::tmrSecondTimerTimeoutHandler);
 }
 void MainMenu::stopMatch(bool hasWinner)
 {
@@ -31,6 +31,10 @@ MainMenu::MainMenu()
 {
   m_ui = new Ui_MainMenu();
   m_ui->setupUi(this);
+
+  //make timers
+  m_tmrMatchTimer = new QTimer(this);
+  m_tmrSecondTimer = new QTimer(this);
 
   makeConnections();
 }
