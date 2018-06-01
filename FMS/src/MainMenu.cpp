@@ -20,6 +20,8 @@ void MainMenu::stopMatch(bool hasWinner)
   //update button text
   m_ui->btnStartStop->setText("Start Match");
 
+  //TODO: add code to stop all the cars and kill the match
+
   //this should maybe be the first thing done in this function, but its last for now
   m_matchRunning = false;
 }
@@ -27,6 +29,8 @@ void MainMenu::startMatch()
 {
   //update button text
   m_ui->btnStartStop->setText("Stop Match");
+
+  //TODO: add code to make sure all the cars are functional and start the match
 
   //this should be the last thing done in this function
   m_matchRunning = true;
