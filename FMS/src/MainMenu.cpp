@@ -22,6 +22,10 @@ void MainMenu::stopMatch(bool hasWinner)
 
   //TODO: add code to stop all the cars and kill the match
 
+  //stop the timers
+  m_tmrMatchTimer->stop();
+  m_tmrSecondTimer->stop();
+
   //this should maybe be the first thing done in this function, but its last for now
   m_matchRunning = false;
 }
@@ -31,6 +35,10 @@ void MainMenu::startMatch()
   m_ui->btnStartStop->setText("Stop Match");
 
   //TODO: add code to make sure all the cars are functional and start the match
+
+  //start the timers
+  m_tmrMatchTimer->start(m_matchSettings->m_seconds * 1000);
+  m_tmrSecondTimer->start(1000);
 
   //this should be the last thing done in this function
   m_matchRunning = true;
@@ -109,6 +117,9 @@ void MainMenu::tmrMatchTimerTimeoutHandler()
   {
     cout << "INFO: MainMenu: Match timer has ended." << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+  //stop match TODO: determine if winner
+  stopMatch(true);
 }
 void MainMenu::tmrSecondTimerTimeoutHandler()
 {

@@ -11,3 +11,5 @@ make output operator for printing the command line args by just doing cout << Cm
 
 when starting a match add in checks to make sure all the cars are connected properly
   probably add in ability for the cars to transmit ready information/bits
+  
+make qLcdNumber subclass that works as a countdown timer
