@@ -49,6 +49,7 @@ set(src src/main.cpp
         src/StopCar.cpp
         src/CmdOptions.cpp
         src/MatchOptions.cpp
+        src/CountdownTimer_Qt.cpp
         )
         
 set(inc inc/CarSettings.h
@@ -58,6 +59,7 @@ set(inc inc/CarSettings.h
         inc/StopCar.h
         inc/CmdOptions.h
         inc/MatchOptions.h
+        inc/CountdownTimer_Qt.h
         )
         
 set(forms inc/CarSettings.ui
