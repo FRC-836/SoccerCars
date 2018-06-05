@@ -36,6 +36,9 @@ void MainMenu::startMatch()
 
   //TODO: add code to make sure all the cars are functional and start the match
 
+  //set the timer value to the start of the match number of seconds
+  m_ui->lcdTimer->display((int)m_matchSettings->m_seconds);
+
   //start the timers
   m_tmrMatchTimer->start(m_matchSettings->m_seconds * 1000);
   m_tmrSecondTimer->start(1000);
@@ -127,4 +130,7 @@ void MainMenu::tmrSecondTimerTimeoutHandler()
   {
     cout << "INFO: MainMenu: second timer ticked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //set timer to one less than it currently is
+  m_ui->lcdTimer->display(m_ui->lcdTimer->value() - 1);
 }
