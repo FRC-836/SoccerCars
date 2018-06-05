@@ -6,6 +6,7 @@
 #include <qmainwindow.h>
 #include <qtimer.h>
 #include <qpointer.h>
+#include <qmediaplayer.h>
 
 #include "ui_MainMenu.h"
 #include "CmdOptions.h"

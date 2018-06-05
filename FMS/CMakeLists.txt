@@ -16,7 +16,8 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_OPTIONS -o inc/)
 
 #Find the QtWidgets library
-find_package(Qt5Widgets)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Multimedia REQUIRED)
 
 #dependencies
 add_subdirectory(deps/OutputManager_qt)
@@ -78,4 +79,5 @@ add_executable(${PROJECT_NAME} ${src} ${inc} ${forms})
 
 #use the widgets moduole from Qt 5
 target_link_libraries(${PROJECT_NAME} OutputManager_Qt
-                      Qt5::Widgets)
+                      Qt5::Widgets
+                      Qt5::Multimedia)

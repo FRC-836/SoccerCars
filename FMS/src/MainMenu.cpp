@@ -29,6 +29,13 @@ void MainMenu::stopMatch(bool hasWinner)
   //clear the timer value
   m_ui->lcdTimer->display(0);
 
+  //TODO: make this more permanent buzzer playing sound
+  QMediaPlayer* player = new QMediaPlayer;
+  player->setMedia(QUrl::fromLocalFile("C:/Users/Cheeto/Robotics/FRC/RocketLeagueCars/Code/FMS/res/alarm-buzzer.mp3"));
+  player->setVolume(100);
+  player->play();
+  //intentional memory leak. sound won't play if the object is deconstructed
+
   //this should maybe be the first thing done in this function, but its last for now
   m_matchRunning = false;
 }
