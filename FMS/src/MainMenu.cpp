@@ -26,6 +26,9 @@ void MainMenu::stopMatch(bool hasWinner)
   m_tmrMatchTimer->stop();
   m_tmrSecondTimer->stop();
 
+  //clear the timer value
+  m_ui->lcdTimer->display(0);
+
   //this should maybe be the first thing done in this function, but its last for now
   m_matchRunning = false;
 }
