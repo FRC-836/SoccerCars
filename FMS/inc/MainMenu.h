@@ -22,6 +22,7 @@ private:
   QPointer<QTimer> m_tmrMatchTimer;
   QPointer<QTimer> m_tmrSecondTimer;
   std::shared_ptr<MatchOptions> m_matchSettings;
+  std::unique_ptr<QMediaPlayer> m_mediaPlayer;
   bool m_matchRunning;
 
   //private functions

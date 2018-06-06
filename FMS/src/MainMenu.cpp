@@ -29,12 +29,10 @@ void MainMenu::stopMatch(bool hasWinner)
   //clear the timer value
   m_ui->lcdTimer->display(0);
 
-  //TODO: make this more permanent buzzer playing sound
-  QMediaPlayer* player = new QMediaPlayer;
-  player->setMedia(QUrl::fromLocalFile("C:/Users/Cheeto/Robotics/FRC/RocketLeagueCars/Code/FMS/res/alarm-buzzer.mp3"));
-  player->setVolume(100);
-  player->play();
-  //intentional memory leak. sound won't play if the object is deconstructed
+  //TODO: make this more permanent buzzer playing sound (also find different sound bite)
+  m_mediaPlayer->setMedia(QUrl::fromLocalFile("C:/Users/Cheeto/Robotics/FRC/RocketLeagueCars/Code/FMS/res/alarm-buzzer.mp3"));
+  m_mediaPlayer->setVolume(100); //TODO: make configurable setting
+  m_mediaPlayer->play();
 
   //this should maybe be the first thing done in this function, but its last for now
   m_matchRunning = false;
@@ -69,6 +67,7 @@ MainMenu::MainMenu()
 
   //initialize variables
   m_matchSettings = std::make_shared<MatchOptions>();
+  m_mediaPlayer = std::make_unique<QMediaPlayer>();
   m_matchRunning = false;
 
   makeConnections();
