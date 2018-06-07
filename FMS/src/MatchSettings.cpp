@@ -5,6 +5,8 @@ extern OutputManager cout;
 MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent) :
   QWidget(parent)
 {
+  setAttribute(Qt::WA_DeleteOnClose);
+
   m_ui = new Ui_MatchSettings();
   m_ui->setupUi(this);
 

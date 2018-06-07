@@ -5,6 +5,8 @@ extern OutputManager cout;
 Diagnostics::Diagnostics(QWidget* parent) :
   QWidget(parent)
 {
+  setAttribute(Qt::WA_DeleteOnClose);
+
   m_ui = new Ui_Diagnostics();
   m_ui->setupUi(this);
 }

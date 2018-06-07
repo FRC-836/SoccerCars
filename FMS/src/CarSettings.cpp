@@ -5,6 +5,8 @@ extern OutputManager cout;
 CarSettings::CarSettings(QWidget* parent) :
   QWidget(parent)
 {
+  setAttribute(Qt::WA_DeleteOnClose);
+
   m_ui = new Ui_CarSettings;
   m_ui->setupUi(this);
 }
