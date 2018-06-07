@@ -74,6 +74,10 @@ MainMenu::MainMenu()
 }
 MainMenu::~MainMenu()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: Deconstructing..." << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   delete m_ui;
 }
 

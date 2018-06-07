@@ -10,4 +10,10 @@ CarSettings::CarSettings(QWidget* parent) :
 }
 CarSettings::~CarSettings()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarSettings: deconstructing..." << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  delete m_ui;
 }

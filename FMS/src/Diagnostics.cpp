@@ -10,5 +10,10 @@ Diagnostics::Diagnostics(QWidget* parent) :
 }
 Diagnostics::~Diagnostics()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: Diagnostics: deconstructing..." << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
   delete m_ui;
 }

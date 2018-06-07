@@ -12,5 +12,10 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
 }
 MatchSettings::~MatchSettings()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MatchSettings: deconstructing..." << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
   delete m_ui;
 }
