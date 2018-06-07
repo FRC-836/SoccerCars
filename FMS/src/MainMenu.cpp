@@ -91,7 +91,21 @@ void MainMenu::btnMatchSettingsClickHandler()
     cout << "INFO: MainMenu: match settings button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  //TODO: add call to match settings editor window
+  if (!m_openWindows.contains(Windows::MATCH_SETTINGS))
+  {
+    MatchSettings* toOpen = new MatchSettings(m_matchSettings);
+    m_openWindows.insert(Windows::MATCH_SETTINGS, toOpen);
+    toOpen->show();
+  } //end  if (m_openWindows.contains(Windows::MATCH_SETTINGS))
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: MainMenu: Can't open Match Settings because it's already open." << endl;
+      cout << "\tShifting focus to open Match Settings window." << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    //TODO: shift focus to open match settings window
+  } //end  else
 }
 void MainMenu::btnCarSettingsClickHandler()
 {
@@ -100,7 +114,21 @@ void MainMenu::btnCarSettingsClickHandler()
     cout << "INFO: MainMenu: car settings button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  //TODO: add call to car settings editor window
+  if (!m_openWindows.contains(Windows::CAR_SETTINGS))
+  {
+    CarSettings* toOpen = new CarSettings();
+    m_openWindows.insert(Windows::CAR_SETTINGS, toOpen);
+    toOpen->show();
+  } //end  if (!m_openWindows.contains(Windows::CAR_SETTINGS))
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: MainMenu: Can't open Car Settings because it's already open." << endl;
+      cout << "\tShifting focus to open Car Settings window." << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    //TODO: shift focus to open car settings window
+  } //end  else
 }
 void MainMenu::btnStartStopClickHandler()
 {
@@ -125,7 +153,21 @@ void MainMenu::btnDiagnosticsClickHandler()
     cout << "INFO: MainMenu: diagnostics button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  //TODO: add call to diagnostics window
+  if (!m_openWindows.contains(Windows::DIAGNOSTICS))
+  {
+    Diagnostics* toOpen = new Diagnostics();
+    m_openWindows.insert(Windows::DIAGNOSTICS, toOpen);
+    toOpen->show();
+  } //end  if (!m_openWindows.contains(Windows::DIAGNOSTICS))
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: MainMenu: Can't open Diagnostics because it's already open." << endl;
+      cout << "\tShifting focus to open Diagnostics window." << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    //TODO: shift focus to open car settings window
+  } //end  else
 }
 void MainMenu::tmrMatchTimerTimeoutHandler()
 {
