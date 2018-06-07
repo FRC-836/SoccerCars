@@ -8,6 +8,7 @@
 #include <qpointer.h>
 #include <qmediaplayer.h>
 #include <qmap.h>
+#include <qevent.h>
 
 #include "ui_MainMenu.h"
 #include "CmdOptions.h"
@@ -42,6 +43,9 @@ private:
   void makeConnections();
   void stopMatch(bool hasWinner);
   void startMatch();
+
+protected:
+  void closeEvent(QCloseEvent* event) override;
 
 public:
   //constructors

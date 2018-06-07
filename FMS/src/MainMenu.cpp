@@ -78,7 +78,29 @@ MainMenu::~MainMenu()
   {
     cout << "INFO: MainMenu: Deconstructing..." << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
   delete m_ui;
+}
+
+//event handlers
+void MainMenu::closeEvent(QCloseEvent* event)
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: handling close event" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //TODO: add check to ask if the user wants to close if there is a match going on
+
+  //close all open windows
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: closing all open windows" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  for (auto window : m_openWindows)
+  {
+    window->close();
+  } //end  for (auto window : m_openWindows)
 }
 
 //public functions
