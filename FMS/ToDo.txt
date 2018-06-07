@@ -13,3 +13,5 @@ when starting a match add in checks to make sure all the cars are connected prop
   probably add in ability for the cars to transmit ready information/bits
   
 make qLcdNumber subclass that works as a countdown timer
+
+add cmd option for a location to log all console output (log file)
