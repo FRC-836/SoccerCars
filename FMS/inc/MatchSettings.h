@@ -4,6 +4,8 @@
 #include <qwidget.h>
 
 #include "ui_MatchSettings.h"
+#include "OutputManager.h"
+#include "CmdOptions.h"
 #include "MatchOptions.h"
 
 class MatchSettings : public QWidget

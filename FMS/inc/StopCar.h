@@ -4,6 +4,7 @@
 #include <qwidget.h>
 
 #include "ui_StopCar.h"
+#include "CmdOptions.h"
 
 class StopCar : public QWidget
 {

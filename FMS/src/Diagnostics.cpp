@@ -1,5 +1,7 @@
 #include "Diagnostics.h"
 
+extern OutputManager cout;
+
 Diagnostics::Diagnostics(QWidget* parent) :
   QWidget(parent)
 {

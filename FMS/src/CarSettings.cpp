@@ -1,5 +1,7 @@
 #include "CarSettings.h"
 
+extern OutputManager cout;
+
 CarSettings::CarSettings(QWidget* parent) :
   QWidget(parent)
 {

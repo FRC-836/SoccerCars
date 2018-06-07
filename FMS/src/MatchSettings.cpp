@@ -1,5 +1,7 @@
 #include "MatchSettings.h"
 
+extern OutputManager cout;
+
 MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent) :
   QWidget(parent)
 {
