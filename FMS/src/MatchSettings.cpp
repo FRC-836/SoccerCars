@@ -3,6 +3,12 @@
 extern OutputManager cout;
 
 //private functions
+void MatchSettings::makeConnections()
+{
+  connect(m_ui->btnCancel, &QPushButton::clicked, this, &MatchSettings::btnCancelClickHandler);
+  connect(m_ui->btnDefault, &QPushButton::clicked, this, &MatchSettings::btnDefaultClickhandler);
+  connect(m_ui->btnSave, &QPushButton::clicked, this, &MatchSettings::btnSaveClickHandler);
+}
 void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
 {
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
@@ -44,6 +50,8 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
   m_matchSettings = options;
 
   itemToGui(options);
+
+  makeConnections();
 }
 MatchSettings::~MatchSettings()
 {
