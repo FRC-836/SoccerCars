@@ -77,10 +77,27 @@ MatchSettings::~MatchSettings()
 //public slots
 void MatchSettings::btnSaveClickHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MatchSettings: save button clicked" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  m_matchSettings = guiToItem();
 }
 void MatchSettings::btnCancelClickHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MatchSettings: cancel button clicked" << endl;
+    cout << "INFO: MatchSettings: Closing window without saving settings" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  close();
 }
 void MatchSettings::btnDefaultClickhandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MatchSettings: return to default button clicked" << endl;
+    cout << "INFO: MatchSettings: Returning the GUI to the most recently saved settings" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  itemToGui(m_matchSettings);
 }
