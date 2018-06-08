@@ -4,6 +4,9 @@
 #include <qwidget.h>
 
 #include "ui_MatchSettings.h"
+#include "OutputManager.h"
+#include "CmdOptions.h"
+#include "MatchOptions.h"
 
 class MatchSettings : public QWidget
 {
@@ -13,7 +16,7 @@ private:
   Ui_MatchSettings* m_ui;
 
 public:
-  MatchSettings(QWidget* parent = nullptr);
+  MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent = nullptr);
   ~MatchSettings();
 
 signals:

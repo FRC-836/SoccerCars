@@ -16,7 +16,12 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_OPTIONS -o inc/)
 
 #Find the QtWidgets library
-find_package(Qt5Widgets)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Multimedia REQUIRED)
+find_package(Qt5gui REQUIRED)
+
+#dependencies
+add_subdirectory(deps/OutputManager_qt)
 
 #configure output directories
 if(WIN32)
@@ -44,6 +49,8 @@ set(src src/main.cpp
         src/MainMenu.cpp
         src/MatchSettings.cpp
         src/StopCar.cpp
+        src/CmdOptions.cpp
+        src/MatchOptions.cpp
         )
         
 set(inc inc/CarSettings.h
@@ -51,6 +58,8 @@ set(inc inc/CarSettings.h
         inc/MainMenu.h
         inc/MatchSettings.h
         inc/StopCar.h
+        inc/CmdOptions.h
+        inc/MatchOptions.h
         )
         
 set(forms inc/CarSettings.ui
@@ -62,10 +71,15 @@ set(forms inc/CarSettings.ui
 
 #setup inc as a valid include directory
 include_directories(${CMAKE_SOURCE_DIR}/Inc
-                    ${CMAKE_CURRENT_BINARY_DIR})
-
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_SOURCE_DIR}/deps/OutputManager_qt/inc
+                    )
+                    
 #create executable
 add_executable(${PROJECT_NAME} ${src} ${inc} ${forms})
 
 #use the widgets moduole from Qt 5
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries(${PROJECT_NAME} OutputManager_Qt
+                      Qt5::Widgets
+                      Qt5::Multimedia
+                      Qt5::Gui)

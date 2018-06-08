@@ -1,0 +1,19 @@
+design settings file for use of loading matches
+design network infrustructure for communicating with the cars and field
+classes to create
+  car diag widget
+  car comm thread/program
+  controller handler
+  cmd options
+  
+  
+make output operator for printing the command line args by just doing cout << CmdOptions << endl;
+
+when starting a match add in checks to make sure all the cars are connected properly
+  probably add in ability for the cars to transmit ready information/bits
+  
+make qLcdNumber subclass that works as a countdown timer
+
+add cmd option for a location to log all console output (log file)
+
+probably should add checks to stop the user from opening certain windows while a match is running (like Match Settings)

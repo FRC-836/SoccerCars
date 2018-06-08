@@ -4,6 +4,8 @@
 #include <qwidget.h>
 
 #include "ui_Diagnostics.h"
+#include "CmdOptions.h"
+#include "OutputManager.h"
 
 class Diagnostics : public QWidget
 {
