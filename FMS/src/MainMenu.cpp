@@ -184,7 +184,7 @@ void MainMenu::btnMatchSettingsClickHandler()
       cout << "INFO: MainMenu: Can't open Match Settings because it's already open." << endl;
       cout << "\tShifting focus to open Match Settings window." << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    //TODO: shift focus to open match settings window
+    m_openWindows[Windows::MATCH_SETTINGS]->activateWindow();
   } //end  else
 }
 void MainMenu::btnCarSettingsClickHandler()
@@ -208,7 +208,7 @@ void MainMenu::btnCarSettingsClickHandler()
       cout << "INFO: MainMenu: Can't open Car Settings because it's already open." << endl;
       cout << "\tShifting focus to open Car Settings window." << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    //TODO: shift focus to open car settings window
+    m_openWindows[Windows::CAR_SETTINGS]->activateWindow();
   } //end  else
 }
 void MainMenu::btnStartStopClickHandler()
@@ -248,7 +248,7 @@ void MainMenu::btnDiagnosticsClickHandler()
       cout << "INFO: MainMenu: Can't open Diagnostics because it's already open." << endl;
       cout << "\tShifting focus to open Diagnostics window." << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    //TODO: shift focus to open car settings window
+    m_openWindows[Windows::DIAGNOSTICS]->activateWindow();
   } //end  else
 }
 void MainMenu::tmrMatchTimerTimeoutHandler()
