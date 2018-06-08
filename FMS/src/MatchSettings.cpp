@@ -5,6 +5,27 @@ extern OutputManager cout;
 //private functions
 void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MatchSettings: recieved call to update the GUI values" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  if (item != nullptr)
+  {
+    m_ui->spnMatchLength->setValue(item->m_seconds);
+    m_ui->spnScoreLimit->setValue(item->m_scoreLimit);
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: updated gui to represent the values specified" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  } //end  if (item != nullptr)
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: Can't update GUI based on a null item" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  else
 }
 std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
 {
@@ -20,6 +41,8 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
   m_ui = new Ui_MatchSettings();
   m_ui->setupUi(this);
 
+  m_matchSettings = options;
+
   itemToGui(options);
 }
 MatchSettings::~MatchSettings()
@@ -30,4 +53,15 @@ MatchSettings::~MatchSettings()
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   delete m_ui;
+}
+
+//public slots
+void MatchSettings::btnSaveClickHandler()
+{
+}
+void MatchSettings::btnCancelClickHandler()
+{
+}
+void MatchSettings::btnDefaultClickhandler()
+{
 }

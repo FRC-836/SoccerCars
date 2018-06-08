@@ -17,6 +17,7 @@ class MatchSettings : public QWidget
 private:
   //member data
   Ui_MatchSettings* m_ui;
+  std::shared_ptr<MatchOptions> m_matchSettings;
 
   //private functions
   void itemToGui(std::shared_ptr<MatchOptions> item);
@@ -28,8 +29,12 @@ public:
   ~MatchSettings();
 
 signals:
+  void settingsUpdated();
 
 public slots:
+  void btnSaveClickHandler();
+  void btnCancelClickHandler();
+  void btnDefaultClickhandler();
 
 };
 

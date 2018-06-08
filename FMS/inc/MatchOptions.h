@@ -9,4 +9,7 @@ public:
   static unsigned int m_scoreLimit;
 };
 
+bool operator==(const MatchOptions& lhs, const MatchOptions& rhs);
+bool operator!=(const MatchOptions& lhs, const MatchOptions& rhs);
+
 #endif
