@@ -29,6 +29,7 @@ private:
     DIAGNOSTICS,
     CAR_SETTINGS
   };
+  static const QMap<Windows, QString> WINDOWS_STR_MAP;
 
   //member variables
   Ui_MainMenu* m_ui;
@@ -57,6 +58,9 @@ public:
   //constructors
   MainMenu();
   ~MainMenu();
+
+  //operator overloads
+  friend OutputManager& operator<<(OutputManager& out, Windows toPrint);
 
 signals:
   void matchStopped();

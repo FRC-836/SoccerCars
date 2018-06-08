@@ -2,6 +2,13 @@
 
 extern OutputManager cout;
 
+//member initialization
+const QMap<MainMenu::Windows, QString> MainMenu::WINDOWS_STR_MAP = {
+  {Windows::CAR_SETTINGS,   "Car Settings"},
+  {Windows::DIAGNOSTICS,    "Diagnostics"},
+  {Windows::MATCH_SETTINGS, "Match Settings"}
+};
+
 //private functions
 void MainMenu::makeConnections()
 {
@@ -148,6 +155,12 @@ MainMenu::~MainMenu()
   delete m_ui;
 }
 
+//operator overloads
+OutputManager& operator<<(OutputManager& out, MainMenu::Windows toPrint)
+{
+  out << MainMenu::WINDOWS_STR_MAP.value(toPrint, "INVALID");
+  return out;
+}
 
 //public slots
 void MainMenu::btnMatchSettingsClickHandler()
