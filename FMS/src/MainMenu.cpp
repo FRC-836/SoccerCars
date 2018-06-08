@@ -54,6 +54,72 @@ void MainMenu::startMatch()
   //this should be the last thing done in this function
   m_matchRunning = true;
 }
+void MainMenu::windowClosed(Windows closedWindow)
+{
+  if (m_openWindows.contains(closedWindow))
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "Info: MainMenu: removing " << closedWindow << " from list of open windows" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    m_openWindows.remove(closedWindow);
+  } //end  if (m_openWindows.contains(closedWindow))
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: MainMenu: Can't remove " << closedWindow <<
+              " from list of open windows because it wasn't open" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  else
+}
+
+//private slots
+void MainMenu::carSettingsClosed()
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: Recieved signal that Car Settings was closed" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  windowClosed(Windows::CAR_SETTINGS);
+}
+void MainMenu::matchSettingsClosed()
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: Recieved signal that Match Settings was closed" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  windowClosed(Windows::MATCH_SETTINGS);
+}
+void MainMenu::diagnosticsClosed()
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: Recieved signal that Diagnostics was closed" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  windowClosed(Windows::DIAGNOSTICS);
+}
+
+//event handlers
+void MainMenu::closeEvent(QCloseEvent* event)
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: handling close event" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //TODO: add check to ask if the user wants to close if there is a match going on
+
+  //close all open windows
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: closing all open windows" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  for (auto window : m_openWindows)
+  {
+    window->close();
+  } //end  for (auto window : m_openWindows)
+}
 
 //constructors
 MainMenu::MainMenu()
@@ -82,28 +148,6 @@ MainMenu::~MainMenu()
   delete m_ui;
 }
 
-//event handlers
-void MainMenu::closeEvent(QCloseEvent* event)
-{
-  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  {
-    cout << "INFO: MainMenu: handling close event" << endl;
-  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-
-  //TODO: add check to ask if the user wants to close if there is a match going on
-
-  //close all open windows
-  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  {
-    cout << "INFO: MainMenu: closing all open windows" << endl;
-  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  for (auto window : m_openWindows)
-  {
-    window->close();
-  } //end  for (auto window : m_openWindows)
-}
-
-//public functions
 
 //public slots
 void MainMenu::btnMatchSettingsClickHandler()
@@ -117,6 +161,7 @@ void MainMenu::btnMatchSettingsClickHandler()
   {
     MatchSettings* toOpen = new MatchSettings(m_matchSettings);
     m_openWindows.insert(Windows::MATCH_SETTINGS, toOpen);
+    connect(toOpen, &MatchSettings::destroyed, this, &MainMenu::matchSettingsClosed);
     toOpen->show();
   } //end  if (m_openWindows.contains(Windows::MATCH_SETTINGS))
   else
@@ -140,6 +185,7 @@ void MainMenu::btnCarSettingsClickHandler()
   {
     CarSettings* toOpen = new CarSettings();
     m_openWindows.insert(Windows::CAR_SETTINGS, toOpen);
+    connect(toOpen, &CarSettings::destroyed, this, &MainMenu::carSettingsClosed);
     toOpen->show();
   } //end  if (!m_openWindows.contains(Windows::CAR_SETTINGS))
   else
@@ -179,6 +225,7 @@ void MainMenu::btnDiagnosticsClickHandler()
   {
     Diagnostics* toOpen = new Diagnostics();
     m_openWindows.insert(Windows::DIAGNOSTICS, toOpen);
+    connect(toOpen, &Diagnostics::destroyed, this, &MainMenu::diagnosticsClosed);
     toOpen->show();
   } //end  if (!m_openWindows.contains(Windows::DIAGNOSTICS))
   else

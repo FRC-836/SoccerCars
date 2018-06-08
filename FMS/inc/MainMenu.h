@@ -43,6 +43,12 @@ private:
   void makeConnections();
   void stopMatch(bool hasWinner);
   void startMatch();
+  void windowClosed(Windows closedWindow);
+
+private slots:
+  void carSettingsClosed();
+  void matchSettingsClosed();
+  void diagnosticsClosed();
 
 protected:
   void closeEvent(QCloseEvent* event) override;
