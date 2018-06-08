@@ -47,8 +47,19 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
   m_ui = new Ui_MatchSettings();
   m_ui->setupUi(this);
 
-  m_matchSettings = options;
+  //if the options passed in is a nullptr, disable the GUI
+  if (options == nullptr)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    {
+      cout << "WARNING: MatchSettings: window called without any settings to edit." << endl;
+      cout << "\tDisabling user input because not sure what to do" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    m_ui->spnMatchLength->setEnabled(false);
+    m_ui->spnScoreLimit->setEnabled(false);
+  } //end  if (options == nullptr)
 
+  m_matchSettings = options;
   itemToGui(options);
 
   makeConnections();
