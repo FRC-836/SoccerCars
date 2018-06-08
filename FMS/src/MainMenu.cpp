@@ -115,17 +115,46 @@ void MainMenu::closeEvent(QCloseEvent* event)
     cout << "INFO: MainMenu: handling close event" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  //TODO: add check to ask if the user wants to close if there is a match going on
+  int msgBoxSelection = QMessageBox::Ok; //if the match isn't running, want to close like normal
+  if (m_matchRunning)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    {
+      cout << "WARNING: MainMenu: attempting to close the FMS while a match is running." << endl;
+      cout << "\tThis operation is unsupported and will have unpredictable consequences." << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    QMessageBox msgBox(this);
+    msgBox.setText("There is a match running");
+    msgBox.setInformativeText("Closing the FMS while a match is running isn't a good idea\n" +
+                              QString("It will have unpredictable consequences."));
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Cancel);
+    msgBoxSelection = msgBox.exec();
+  } //end  if (m_matchRunning)
 
-  //close all open windows
-  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  switch (msgBoxSelection)
   {
-    cout << "INFO: MainMenu: closing all open windows" << endl;
-  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  for (auto window : m_openWindows)
-  {
-    window->close();
-  } //end  for (auto window : m_openWindows)
+    case QMessageBox::Ok:
+      event->accept();
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      {
+        cout << "INFO: MainMenu: closing all open windows" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      for (auto window : m_openWindows)
+      {
+        window->close();
+      } //end  for (auto window : m_openWindows)
+      QMainWindow::closeEvent(event);
+      break;
+    case QMessageBox::Cancel:
+      //reject the event, not ready to close yet
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      {
+        cout << "INFO: MainMenu: canceling close event" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      event->ignore();
+      break;
+  } //end  switch (msgBoxSelection)
 }
 
 //constructors

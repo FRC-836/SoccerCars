@@ -9,6 +9,7 @@
 #include <qmediaplayer.h>
 #include <qmap.h>
 #include <qevent.h>
+#include <qmessagebox.h>
 
 #include "ui_MainMenu.h"
 #include "CmdOptions.h"
