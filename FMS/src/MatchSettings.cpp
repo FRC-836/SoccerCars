@@ -2,6 +2,16 @@
 
 extern OutputManager cout;
 
+//private functions
+void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
+{
+}
+std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
+{
+  return nullptr;
+}
+
+//constructors
 MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent) :
   QWidget(parent)
 {
@@ -10,7 +20,7 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
   m_ui = new Ui_MatchSettings();
   m_ui->setupUi(this);
 
-  //TODO: handle match options, set values on the UI to these values
+  itemToGui(options);
 }
 MatchSettings::~MatchSettings()
 {
