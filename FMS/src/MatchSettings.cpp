@@ -22,14 +22,14 @@ void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
     m_ui->spnScoreLimit->setValue(item->m_scoreLimit);
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
     {
-      cout << "INFO: updated gui to represent the values specified" << endl;
+      cout << "INFO: MatchSettings: updated gui to represent the values specified" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   } //end  if (item != nullptr)
   else
   {
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
     {
-      cout << "ERROR: Can't update GUI based on a null item" << endl;
+      cout << "ERROR: MatchSettings: Can't update GUI based on a null item" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
   } //end  else
 }
