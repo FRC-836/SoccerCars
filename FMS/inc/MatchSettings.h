@@ -22,7 +22,7 @@ private:
   //private functions
   void makeConnections();
   void itemToGui(std::shared_ptr<MatchOptions> item);
-  std::shared_ptr<MatchOptions> guiToItem();
+  void guiToItem();
 
 public:
   //constructors

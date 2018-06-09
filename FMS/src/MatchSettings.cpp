@@ -33,9 +33,25 @@ void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
   } //end  else
 }
-std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
+void MatchSettings::guiToItem()
 {
-  return nullptr;
+  if (m_matchSettings == nullptr)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: MatchSettings: Can't store the GUI values because the settings object"
+           << " doesn't exist. " << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  if (m_matchSettings == nullptr)
+  else
+  {
+    m_matchSettings->m_scoreLimit = m_ui->spnScoreLimit->value();
+    m_matchSettings->m_seconds = m_ui->spnMatchLength->value();
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+    {
+      cout << "INFO: Match Settings: Saved match settings" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  } //end  else
 }
 
 //constructors
@@ -81,7 +97,7 @@ void MatchSettings::btnSaveClickHandler()
   {
     cout << "INFO: MatchSettings: save button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  m_matchSettings = guiToItem();
+  guiToItem();
 }
 void MatchSettings::btnCancelClickHandler()
 {
