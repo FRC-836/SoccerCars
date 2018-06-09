@@ -5,6 +5,7 @@
 
 #include <qwidget.h>
 #include <qevent.h>
+#include <qmessagebox.h>
 
 #include "ui_MatchSettings.h"
 #include "OutputManager.h"
@@ -23,7 +24,7 @@ private:
   //private functions
   void makeConnections();
   void itemToGui(std::shared_ptr<MatchOptions> item);
-  void guiToItem();
+  std::shared_ptr<MatchOptions> guiToItem();
 
 protected:
   void closeEvent(QCloseEvent* e) override;

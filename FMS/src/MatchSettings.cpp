@@ -33,7 +33,7 @@ void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
   } //end  else
 }
-void MatchSettings::guiToItem()
+std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
 {
   if (m_matchSettings == nullptr)
   {
@@ -42,22 +42,62 @@ void MatchSettings::guiToItem()
       cout << "ERROR: MatchSettings: Can't store the GUI values because the settings object"
            << " doesn't exist. " << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    return nullptr;
   } //end  if (m_matchSettings == nullptr)
   else
   {
-    m_matchSettings->m_scoreLimit = m_ui->spnScoreLimit->value();
-    m_matchSettings->m_seconds = m_ui->spnMatchLength->value();
+    std::shared_ptr<MatchOptions> toReturn = std::make_shared<MatchOptions>();
+    toReturn->m_scoreLimit = m_ui->spnScoreLimit->value();
+    toReturn->m_seconds = m_ui->spnMatchLength->value();
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
     {
       cout << "INFO: Match Settings: Saved match settings" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    return toReturn;
   } //end  else
 }
 
 //event handlers
 void MatchSettings::closeEvent(QCloseEvent * e)
 {
-  //TODO: implement
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: handling close event" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  int msgBoxSelection = QMessageBox::Discard; //if there aren't unsaved changes close like normal
+  if (m_matchSettings != guiToItem())
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    {
+      cout << "WARNING: MatchSettings: attempting to close with unsaved changes" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    QMessageBox msgBox(this);
+    msgBox.setText("There are unsaved changes");
+    msgBox.setInformativeText("Would you like to save changes?");
+    msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Save);
+    msgBoxSelection = msgBox.exec();
+  } //end  if (m_matchRunning)
+
+  switch (msgBoxSelection)
+  {
+    case QMessageBox::Save:
+      m_matchSettings = guiToItem();
+      //intentional fallthrough
+    case QMessageBox::Discard:
+      e->accept();
+      QWidget::closeEvent(e);
+      break;
+    case QMessageBox::Cancel:
+      //reject the event, not ready to close yet
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      {
+        cout << "INFO: MatchSettings: canceling close event" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      e->ignore();
+      break;
+  } //end  switch (msgBoxSelection)
 }
 
 //constructors
@@ -103,7 +143,7 @@ void MatchSettings::btnSaveClickHandler()
   {
     cout << "INFO: MatchSettings: save button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  guiToItem();
+  m_matchSettings = guiToItem();
   close();
 }
 void MatchSettings::btnCancelClickHandler()
