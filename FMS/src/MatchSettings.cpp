@@ -66,7 +66,7 @@ void MatchSettings::closeEvent(QCloseEvent * e)
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   int msgBoxSelection = QMessageBox::Discard; //if there aren't unsaved changes close like normal
-  if (m_matchSettings != guiToItem())
+  if (*m_matchSettings != *guiToItem())
   {
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
     {
