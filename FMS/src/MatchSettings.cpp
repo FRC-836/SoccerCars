@@ -35,26 +35,14 @@ void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
 }
 std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
 {
-  if (m_matchSettings == nullptr)
+  std::shared_ptr<MatchOptions> toReturn = std::make_shared<MatchOptions>();
+  toReturn->m_scoreLimit = m_ui->spnScoreLimit->value();
+  toReturn->m_seconds = m_ui->spnMatchLength->value();
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
   {
-    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-    {
-      cout << "ERROR: MatchSettings: Can't store the GUI values because the settings object"
-           << " doesn't exist. " << endl;
-    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-    return nullptr;
-  } //end  if (m_matchSettings == nullptr)
-  else
-  {
-    std::shared_ptr<MatchOptions> toReturn = std::make_shared<MatchOptions>();
-    toReturn->m_scoreLimit = m_ui->spnScoreLimit->value();
-    toReturn->m_seconds = m_ui->spnMatchLength->value();
-    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
-    {
-      cout << "INFO: Match Settings: Saved match settings" << endl;
-    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    return toReturn;
-  } //end  else
+    cout << "INFO: Match Settings: Saved match settings" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  return toReturn;
 }
 
 //event handlers
