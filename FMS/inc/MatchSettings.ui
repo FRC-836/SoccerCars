@@ -35,6 +35,9 @@
          <pointsize>14</pointsize>
         </font>
        </property>
+       <property name="maximum">
+        <number>2147483647</number>
+       </property>
       </widget>
      </item>
      <item row="1" column="0">
@@ -55,6 +58,9 @@
         <font>
          <pointsize>14</pointsize>
         </font>
+       </property>
+       <property name="maximum">
+        <number>2147483647</number>
        </property>
       </widget>
      </item>
