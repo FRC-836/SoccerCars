@@ -97,7 +97,10 @@ void MatchSettings::btnDefaultClickhandler()
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: MatchSettings: return to default button clicked" << endl;
-    cout << "INFO: MatchSettings: Returning the GUI to the most recently saved settings" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+  {
+    cout << "INFO: MatchSettings: Returning the GUI to the most recently saved settings" << endl;
+  }
   itemToGui(m_matchSettings);
 }
