@@ -54,6 +54,12 @@ void MatchSettings::guiToItem()
   } //end  else
 }
 
+//event handlers
+void MatchSettings::closeEvent(QCloseEvent * e)
+{
+  //TODO: implement
+}
+
 //constructors
 MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent) :
   QWidget(parent)
@@ -98,6 +104,7 @@ void MatchSettings::btnSaveClickHandler()
     cout << "INFO: MatchSettings: save button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   guiToItem();
+  close();
 }
 void MatchSettings::btnCancelClickHandler()
 {
