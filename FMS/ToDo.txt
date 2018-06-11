@@ -17,3 +17,7 @@ make qLcdNumber subclass that works as a countdown timer
 add cmd option for a location to log all console output (log file)
 
 probably should add checks to stop the user from opening certain windows while a match is running (like Match Settings)
+
+change size of message box warning about closing FMS while match is running to make it wider
+
+fix bug where closing the match settings window always things theare aren't any unsaved changes, even if there are

@@ -4,7 +4,9 @@
 class MatchOptions
 {
 public:
+  //values
   static unsigned int m_seconds;
+  static unsigned int m_scoreLimit;
 };
 
 #endif
