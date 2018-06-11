@@ -18,6 +18,8 @@ void MatchSettings::itemToGui()
 
   m_ui->spnMatchLength->setValue(MatchOptions::m_seconds);
   m_ui->spnScoreLimit->setValue(MatchOptions::m_scoreLimit);
+  m_ui->spnCarsPerTeam->setValue(MatchOptions::m_carsPerTeam);
+  m_ui->spnNumberOfTeams->setValue(MatchOptions::m_numberOfTeams);
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: MatchSettings: updated gui to represent the values specified" << endl;
@@ -27,6 +29,9 @@ void MatchSettings::guiToItem()
 {
   MatchOptions::m_scoreLimit = m_ui->spnScoreLimit->value();
   MatchOptions::m_seconds = m_ui->spnMatchLength->value();
+  MatchOptions::m_carsPerTeam = m_ui->spnCarsPerTeam->value();
+  MatchOptions::m_numberOfTeams = m_ui->spnNumberOfTeams->value();
+
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
   {
     cout << "INFO: Match Settings: Saved match settings" << endl;
@@ -39,6 +44,14 @@ bool MatchSettings::unsavedChanges()
     return true;
   }
   if (MatchOptions::m_seconds != m_ui->spnMatchLength->value())
+  {
+    return true;
+  }
+  if (MatchOptions::m_carsPerTeam != m_ui->spnCarsPerTeam->value())
+  {
+    return true;
+  }
+  if (MatchOptions::m_numberOfTeams != m_ui->spnNumberOfTeams->value())
   {
     return true;
   }
