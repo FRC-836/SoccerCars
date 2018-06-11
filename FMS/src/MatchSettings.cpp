@@ -9,40 +9,40 @@ void MatchSettings::makeConnections()
   connect(m_ui->btnDefault, &QPushButton::clicked, this, &MatchSettings::btnDefaultClickhandler);
   connect(m_ui->btnSave, &QPushButton::clicked, this, &MatchSettings::btnSaveClickHandler);
 }
-void MatchSettings::itemToGui(std::shared_ptr<MatchOptions> item)
+void MatchSettings::itemToGui()
 {
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: MatchSettings: recieved call to update the GUI values" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  if (item != nullptr)
+  m_ui->spnMatchLength->setValue(MatchOptions::m_seconds);
+  m_ui->spnScoreLimit->setValue(MatchOptions::m_scoreLimit);
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
-    m_ui->spnMatchLength->setValue(item->m_seconds);
-    m_ui->spnScoreLimit->setValue(item->m_scoreLimit);
-    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    {
-      cout << "INFO: MatchSettings: updated gui to represent the values specified" << endl;
-    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  } //end  if (item != nullptr)
-  else
-  {
-    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-    {
-      cout << "ERROR: MatchSettings: Can't update GUI based on a null item" << endl;
-    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-  } //end  else
+    cout << "INFO: MatchSettings: updated gui to represent the values specified" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
-std::shared_ptr<MatchOptions> MatchSettings::guiToItem()
+void MatchSettings::guiToItem()
 {
-  std::shared_ptr<MatchOptions> toReturn = std::make_shared<MatchOptions>();
-  toReturn->m_scoreLimit = m_ui->spnScoreLimit->value();
-  toReturn->m_seconds = m_ui->spnMatchLength->value();
+  MatchOptions::m_scoreLimit = m_ui->spnScoreLimit->value();
+  MatchOptions::m_seconds = m_ui->spnMatchLength->value();
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
   {
     cout << "INFO: Match Settings: Saved match settings" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  return toReturn;
+}
+bool MatchSettings::unsavedChanges()
+{
+  if (MatchOptions::m_scoreLimit != m_ui->spnScoreLimit->value())
+  {
+    return true;
+  }
+  if (MatchOptions::m_seconds != m_ui->spnMatchLength->value())
+  {
+    return true;
+  }
+  return false;
 }
 
 //event handlers
@@ -54,7 +54,7 @@ void MatchSettings::closeEvent(QCloseEvent * e)
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   int msgBoxSelection = QMessageBox::Discard; //if there aren't unsaved changes close like normal
-  if (*m_matchSettings != *guiToItem())
+  if (unsavedChanges())
   {
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
     {
@@ -71,7 +71,7 @@ void MatchSettings::closeEvent(QCloseEvent * e)
   switch (msgBoxSelection)
   {
     case QMessageBox::Save:
-      m_matchSettings = guiToItem();
+      guiToItem();
       //intentional fallthrough
     case QMessageBox::Discard:
       e->accept();
@@ -89,7 +89,7 @@ void MatchSettings::closeEvent(QCloseEvent * e)
 }
 
 //constructors
-MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent) :
+MatchSettings::MatchSettings(QWidget* parent) :
   QWidget(parent)
 {
   setAttribute(Qt::WA_DeleteOnClose);
@@ -97,20 +97,7 @@ MatchSettings::MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* par
   m_ui = new Ui_MatchSettings();
   m_ui->setupUi(this);
 
-  //if the options passed in is a nullptr, disable the GUI
-  if (options == nullptr)
-  {
-    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
-    {
-      cout << "WARNING: MatchSettings: window called without any settings to edit." << endl;
-      cout << "\tDisabling user input because not sure what to do" << endl;
-    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
-    m_ui->spnMatchLength->setEnabled(false);
-    m_ui->spnScoreLimit->setEnabled(false);
-  } //end  if (options == nullptr)
-
-  m_matchSettings = options;
-  itemToGui(options);
+  itemToGui();
 
   makeConnections();
 }
@@ -131,7 +118,7 @@ void MatchSettings::btnSaveClickHandler()
   {
     cout << "INFO: MatchSettings: save button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  m_matchSettings = guiToItem();
+  guiToItem();
   close();
 }
 void MatchSettings::btnCancelClickHandler()
@@ -153,5 +140,5 @@ void MatchSettings::btnDefaultClickhandler()
   {
     cout << "INFO: MatchSettings: Returning the GUI to the most recently saved settings" << endl;
   }
-  itemToGui(m_matchSettings);
+  itemToGui();
 }

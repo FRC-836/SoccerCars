@@ -36,7 +36,6 @@ private:
   Ui_MainMenu* m_ui;
   QPointer<QTimer> m_tmrMatchTimer;
   QPointer<QTimer> m_tmrSecondTimer;
-  std::shared_ptr<MatchOptions> m_matchSettings;
   std::unique_ptr<QMediaPlayer> m_mediaPlayer;
   QMap<Windows, QWidget*> m_openWindows;
   bool m_matchRunning;

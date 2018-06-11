@@ -52,10 +52,10 @@ void MainMenu::startMatch()
   //TODO: add code to make sure all the cars are functional and start the match
 
   //set the timer value to the start of the match number of seconds
-  m_ui->lcdTimer->display((int)m_matchSettings->m_seconds);
+  m_ui->lcdTimer->display((int)MatchOptions::m_seconds);
 
   //start the timers
-  m_tmrMatchTimer->start(m_matchSettings->m_seconds * 1000);
+  m_tmrMatchTimer->start(MatchOptions::m_seconds * 1000);
   m_tmrSecondTimer->start(1000);
 
   //this should be the last thing done in this function
@@ -168,7 +168,6 @@ MainMenu::MainMenu()
   m_tmrSecondTimer = new QTimer(this);
 
   //initialize variables
-  m_matchSettings = std::make_shared<MatchOptions>();
   m_mediaPlayer = std::make_unique<QMediaPlayer>();
   m_matchRunning = false;
 
@@ -201,7 +200,7 @@ void MainMenu::btnMatchSettingsClickHandler()
 
   if (!m_openWindows.contains(Windows::MATCH_SETTINGS))
   {
-    MatchSettings* toOpen = new MatchSettings(m_matchSettings);
+    MatchSettings* toOpen = new MatchSettings();
     m_openWindows.insert(Windows::MATCH_SETTINGS, toOpen);
     connect(toOpen, &MatchSettings::destroyed, this, &MainMenu::matchSettingsClosed);
     toOpen->show();

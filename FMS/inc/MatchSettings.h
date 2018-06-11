@@ -19,19 +19,19 @@ class MatchSettings : public QWidget
 private:
   //member data
   Ui_MatchSettings* m_ui;
-  std::shared_ptr<MatchOptions> m_matchSettings;
 
   //private functions
   void makeConnections();
-  void itemToGui(std::shared_ptr<MatchOptions> item);
-  std::shared_ptr<MatchOptions> guiToItem();
+  void itemToGui();
+  void guiToItem();
+  bool unsavedChanges();
 
 protected:
   void closeEvent(QCloseEvent* e) override;
 
 public:
   //constructors
-  MatchSettings(std::shared_ptr<MatchOptions> options, QWidget* parent = nullptr);
+  MatchSettings(QWidget* parent = nullptr);
   ~MatchSettings();
 
 signals:
