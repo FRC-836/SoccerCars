@@ -6,6 +6,7 @@
 #include "ui_CarSettings.h"
 #include "CmdOptions.h"
 #include "OutputManager.h"
+#include "CarOptionsWidget.h"
 
 class CarSettings : public QWidget
 {
