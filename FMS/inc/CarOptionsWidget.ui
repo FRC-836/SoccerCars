@@ -103,18 +103,6 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="btnUpTeam">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="btnDownTeam">
        <property name="font">
         <font>
@@ -122,7 +110,19 @@
         </font>
        </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>Down Team</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnUpTeam">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Up Team</string>
        </property>
       </widget>
      </item>
