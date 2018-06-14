@@ -14,6 +14,7 @@ class CarSettings : public QWidget
 
 private:
   Ui_CarSettings* m_ui;
+  CarOptionsWidget* m_temp; //TEMP
 
 public:
   CarSettings(QWidget* parent = nullptr);

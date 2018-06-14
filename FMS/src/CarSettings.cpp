@@ -9,6 +9,10 @@ CarSettings::CarSettings(QWidget* parent) :
 
   m_ui = new Ui_CarSettings;
   m_ui->setupUi(this);
+
+  //TEMP: to test display code for the car options widget
+  m_temp = new CarOptionsWidget();
+  m_temp->show();
 }
 CarSettings::~CarSettings()
 {
@@ -18,4 +22,7 @@ CarSettings::~CarSettings()
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   delete m_ui;
+
+  //TEMP
+  delete m_temp;
 }
