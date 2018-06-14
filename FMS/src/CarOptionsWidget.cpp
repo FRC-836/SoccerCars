@@ -2,7 +2,13 @@
 
 extern OutputManager cout;
 
-CarOptionsWidget::CarOptionsWidget(QWidget* parent = nullptr) :
+//private functions
+void CarOptionsWidget::makeConnections()
+{
+}
+
+//constructors
+CarOptionsWidget::CarOptionsWidget(QWidget* parent) :
   QWidget(parent)
 {
   m_ui = new Ui_CarOptionsWidget;
@@ -16,4 +22,21 @@ CarOptionsWidget::~CarOptionsWidget()
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   delete m_ui;
+}
+
+//public slots
+void CarOptionsWidget::btnDownTeamClickHandler()
+{
+}
+void CarOptionsWidget::btnUpTeamClickHandler()
+{
+}
+void CarOptionsWidget::btnIndicateClickHandler()
+{
+}
+void CarOptionsWidget::cmbControllerValChangeHandler()
+{
+}
+void CarOptionsWidget::cmbBypassValChangeHandler()
+{
 }

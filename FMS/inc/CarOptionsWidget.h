@@ -10,9 +10,14 @@
 class CarOptionsWidget : public QWidget
 {
 private:
+  //member data
   Ui_CarOptionsWidget* m_ui;
 
+  //private functions
+  void makeConnections();
+
 public:
+  //constructors
   CarOptionsWidget(QWidget* parent = nullptr);
   ~CarOptionsWidget();
 
@@ -44,6 +49,11 @@ signals:
   void indicateRequested();
 
 public slots:
+  void btnDownTeamClickHandler();
+  void btnUpTeamClickHandler();
+  void btnIndicateClickHandler();
+  void cmbControllerValChangeHandler();
+  void cmbBypassValChangeHandler();
   
 };
 
