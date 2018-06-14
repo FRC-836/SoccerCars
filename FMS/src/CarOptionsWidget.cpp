@@ -13,6 +13,10 @@ CarOptionsWidget::CarOptionsWidget(QWidget* parent) :
 {
   m_ui = new Ui_CarOptionsWidget;
   m_ui->setupUi(this);
+
+  //set the text for the buttons that need unicode characters
+  m_ui->btnUpTeam->setText(QChar(0x25B2));
+  m_ui->btnDownTeam->setText(QChar(0x25BC));
 }
 CarOptionsWidget::~CarOptionsWidget()
 {
