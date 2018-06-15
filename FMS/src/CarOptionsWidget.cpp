@@ -31,7 +31,19 @@ CarOptionsWidget::CarOptionsWidget(QWidget* parent) :
   m_ui->btnUpTeam->setText(QChar(0x25B2));
   m_ui->btnDownTeam->setText(QChar(0x25BC));
 
-  //setup the controller combobox values
+  //setup the enable/bypass combobox
+  for (auto option : CMB_ENABLE_STR)
+  {
+    m_ui->cmbEnabled->addItem(option);
+  } //end  for (auto option : CMB_ENABLE_STR
+  m_ui->cmbEnabled->setCurrentIndex(static_cast<int>(CmbEnableOptions::PLAYING));
+
+  //setup the controller combobox
+  int numControllers = MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams;
+  for (int i = 0; i < numControllers; i++)
+  {
+    m_ui->cmbController->addItem("Controller " + QString::number(i + 1));
+  } //end  for (int i = 0; i < numControllers; i++
 
   makeConnections();
 }

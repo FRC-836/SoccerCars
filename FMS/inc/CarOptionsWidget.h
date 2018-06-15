@@ -7,6 +7,7 @@
 #include "ui_CarOptionsWidget.h"
 #include "OutputManager.h"
 #include "CmdOptions.h"
+#include "MatchOptions.h"
 
 class CarOptionsWidget : public QWidget
 {
