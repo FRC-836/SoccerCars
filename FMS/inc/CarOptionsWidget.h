@@ -2,6 +2,7 @@
 #define SOCCER_CARS_FMS_CAR_OPTIONS_WIDGET_H
 
 #include <qwidget.h>
+#include <qmap.h>
 
 #include "ui_CarOptionsWidget.h"
 #include "OutputManager.h"
@@ -10,6 +11,14 @@
 class CarOptionsWidget : public QWidget
 {
 private:
+  //enums for combo box selection options
+  enum class CmbEnableOptions
+  {
+    PLAYING,
+    BYPASSED
+  };
+  static const QMap<CmbEnableOptions, QString> CMB_ENABLE_STR;
+
   //member data
   Ui_CarOptionsWidget* m_ui;
 

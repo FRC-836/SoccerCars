@@ -2,6 +2,12 @@
 
 extern OutputManager cout;
 
+//UI helper data
+const QMap<CarOptionsWidget::CmbEnableOptions, QString> CarOptionsWidget::CMB_ENABLE_STR = {
+  {CmbEnableOptions::PLAYING,  "Playing"},
+  {CmbEnableOptions::BYPASSED, "Bypassed"}
+};
+
 //private functions
 void CarOptionsWidget::makeConnections()
 {
