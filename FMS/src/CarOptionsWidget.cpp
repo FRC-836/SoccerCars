@@ -42,16 +42,36 @@ CarOptionsWidget::~CarOptionsWidget()
 //public slots
 void CarOptionsWidget::btnDownTeamClickHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: down team button clicked" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
 void CarOptionsWidget::btnUpTeamClickHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: up team button clicked" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
 void CarOptionsWidget::btnIndicateClickHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: indicate button clicked" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
 void CarOptionsWidget::cmbControllerValChangeHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: controller combo box value changed" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
 void CarOptionsWidget::cmbBypassValChangeHandler()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: car enable status combo box value changed" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
