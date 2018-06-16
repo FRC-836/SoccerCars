@@ -29,6 +29,8 @@ private:
 
   //private functions
   void makeConnections();
+  void itemToGui();
+  void guiToItem();
 
 public:
   //constructors
