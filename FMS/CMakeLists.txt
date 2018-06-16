@@ -52,6 +52,7 @@ set(src src/main.cpp
         src/CmdOptions.cpp
         src/MatchOptions.cpp
         src/CarOptionsWidget.cpp
+        src/CarOptions.cpp
         )
         
 set(inc inc/CarSettings.h
@@ -62,6 +63,7 @@ set(inc inc/CarSettings.h
         inc/CmdOptions.h
         inc/MatchOptions.h
         inc/CarOptionsWidget.h
+        inc/CarOptions.h
         )
         
 set(forms inc/CarSettings.ui
