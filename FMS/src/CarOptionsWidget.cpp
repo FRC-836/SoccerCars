@@ -21,9 +21,13 @@ void CarOptionsWidget::makeConnections()
 }
 
 //constructors
-CarOptionsWidget::CarOptionsWidget(QWidget* parent) :
+CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidget* parent) :
   QWidget(parent)
 {
+  //store the car options to be modified by this widget
+  m_carOptions = carOptions;
+
+  //setup the UI
   m_ui = new Ui_CarOptionsWidget;
   m_ui->setupUi(this);
 

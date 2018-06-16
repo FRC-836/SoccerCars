@@ -1,6 +1,8 @@
 #ifndef SOCCER_CARS_FMS_CAR_OPTIONS_WIDGET_H
 #define SOCCER_CARS_FMS_CAR_OPTIONS_WIDGET_H
 
+#include <memory>
+
 #include <qwidget.h>
 #include <qmap.h>
 
@@ -8,6 +10,7 @@
 #include "OutputManager.h"
 #include "CmdOptions.h"
 #include "MatchOptions.h"
+#include "CarOptions.h"
 
 class CarOptionsWidget : public QWidget
 {
@@ -22,13 +25,14 @@ private:
 
   //member data
   Ui_CarOptionsWidget* m_ui;
+  std::shared_ptr<CarOptions> m_carOptions;
 
   //private functions
   void makeConnections();
 
 public:
   //constructors
-  CarOptionsWidget(QWidget* parent = nullptr);
+  CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidget* parent = nullptr);
   ~CarOptionsWidget();
 
 signals:

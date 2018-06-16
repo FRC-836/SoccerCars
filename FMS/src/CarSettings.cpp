@@ -11,7 +11,8 @@ CarSettings::CarSettings(QWidget* parent) :
   m_ui->setupUi(this);
 
   //TEMP: to test display code for the car options widget
-  m_temp = new CarOptionsWidget();
+  std::shared_ptr<CarOptions> temp = std::make_shared<CarOptions>();
+  m_temp = new CarOptionsWidget(temp);
   m_temp->show();
 }
 CarSettings::~CarSettings()
