@@ -83,14 +83,14 @@ void CarOptionsWidget::btnIndicateClickHandler()
     cout << "INFO: CarOptionsWidget: indicate button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
-void CarOptionsWidget::cmbControllerValChangeHandler()
+void CarOptionsWidget::cmbControllerValChangeHandler(int newIndex)
 {
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: CarOptionsWidget: controller combo box value changed" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 }
-void CarOptionsWidget::cmbBypassValChangeHandler()
+void CarOptionsWidget::cmbBypassValChangeHandler(int newIndex)
 {
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {

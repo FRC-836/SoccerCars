@@ -67,8 +67,8 @@ public slots:
   void btnDownTeamClickHandler();
   void btnUpTeamClickHandler();
   void btnIndicateClickHandler();
-  void cmbControllerValChangeHandler();
-  void cmbBypassValChangeHandler();
+  void cmbControllerValChangeHandler(int newIndex);
+  void cmbBypassValChangeHandler(int newIndex);
   
 };
 
