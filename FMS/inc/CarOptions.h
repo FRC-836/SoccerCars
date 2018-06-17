@@ -9,7 +9,7 @@ class CarOptions
 private:
   //member data
   unsigned int m_team;
-  bool bypassed;
+  bool m_bypassed;
 
   //private functions
   void init(unsigned int team);

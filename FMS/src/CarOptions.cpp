@@ -6,7 +6,7 @@ extern OutputManager cout;
 void CarOptions::init(unsigned int team)
 {
   setTeam(team);
-  bypassed = false; //all cars are enabled by default
+  m_bypassed = false; //all cars are enabled by default
 }
 
 //constructors
@@ -22,7 +22,7 @@ CarOptions::CarOptions(unsigned int team)
 //public functions
 void CarOptions::bypass()
 {
-  bypassed = true;
+  m_bypassed = true;
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: CarOptions: Car status updated to bypassed" << endl;
@@ -30,7 +30,7 @@ void CarOptions::bypass()
 };
 void CarOptions::enable()
 {
-  bypassed = false;
+  m_bypassed = false;
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: CarOptions: car status updated to enabled" << endl;
