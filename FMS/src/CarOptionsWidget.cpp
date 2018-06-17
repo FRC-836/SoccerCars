@@ -91,7 +91,9 @@ void CarOptionsWidget::btnIndicateClickHandler()
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: CarOptionsWidget: indicate button clicked" << endl;
+    cout << "INFO: CarOptionsWidget: sending indicate signal" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  emit indicateRequested();
 }
 void CarOptionsWidget::cmbControllerValChangeHandler(int newIndex)
 {
