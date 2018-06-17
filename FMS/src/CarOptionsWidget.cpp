@@ -108,4 +108,24 @@ void CarOptionsWidget::cmbBypassValChangeHandler(int newIndex)
   {
     cout << "INFO: CarOptionsWidget: car enable status combo box value changed" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  switch (static_cast<CmbEnableOptions>(newIndex))
+  {
+    case CmbEnableOptions::BYPASSED:
+      m_carOptions->bypass();
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      {
+        cout << "INFO: CarOptionsWidget: sending bypass signal with bypass = true" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      emit bypassStateChanged(true);
+      break;
+    case CmbEnableOptions::PLAYING:
+      m_carOptions->enable();
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      {
+        cout << "INFO: CarOptionsWidget: sending bypass signal with bypass = false" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+      emit bypassStateChanged(false);
+      break;
+  }
 }
