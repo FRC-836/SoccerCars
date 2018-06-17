@@ -78,6 +78,30 @@ void CarOptionsWidget::btnDownTeamClickHandler()
   {
     cout << "INFO: CarOptionsWidget: down team button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //determine new team number and check if its too low
+  //don't need to check if too high because team is decreasing
+  int newTeam = m_carOptions->getTeam() - 1;
+  if (newTeam < 0)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: CarOptionsWidget: attempting to set team too low" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  if (newTeam < 0)
+  else
+  {
+    //set new team and update label
+    m_carOptions->setTeam(newTeam);
+    m_ui->lblTeamName->setText("Team " + QString::number(newTeam + 1));
+
+    //emit the team chaged signal
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    emit teamChange(newTeam);
+  } //end  else
 }
 void CarOptionsWidget::btnUpTeamClickHandler()
 {
@@ -85,6 +109,30 @@ void CarOptionsWidget::btnUpTeamClickHandler()
   {
     cout << "INFO: CarOptionsWidget: up team button clicked" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //determine new team number and check if its too high
+  //don't need to check if too low because team is increasing`
+  int newTeam = m_carOptions->getTeam() + 1;
+  if (newTeam >= MatchOptions::m_numberOfTeams)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: CarOptionsWidget: Attempting to set team too high" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  if (newTeam >= MatchOptions::m_numberOfTeams)
+  else
+  {
+    //set new team and update label
+    m_carOptions->setTeam(newTeam);
+    m_ui->lblTeamName->setText("Team " + QString::number(newTeam + 1));
+
+    //emit the team chaged signal
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    emit teamChange(newTeam);
+  } //end  else
 }
 void CarOptionsWidget::btnIndicateClickHandler()
 {
