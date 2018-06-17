@@ -14,6 +14,7 @@
 
 class CarOptionsWidget : public QWidget
 {
+  Q_OBJECT
 private:
   //enums for combo box selection options
   enum class CmbEnableOptions
