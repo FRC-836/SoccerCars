@@ -25,6 +25,7 @@ public:
 
   //getters
   unsigned int getTeam();
+  bool getBypassed();
 
   //setters
   void setTeam(unsigned int team);

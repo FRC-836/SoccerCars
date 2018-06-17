@@ -42,6 +42,10 @@ unsigned int CarOptions::getTeam()
 {
   return m_team;
 }
+bool CarOptions::getBypassed()
+{
+  return m_bypassed;
+}
 
 //setter
 void CarOptions::setTeam(unsigned int team)
