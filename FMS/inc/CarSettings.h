@@ -2,6 +2,7 @@
 #define SOCCER_CARS_FMS_CONNECT_H
 
 #include <qwidget.h>
+#include <qvector.h>
 
 #include "ui_CarSettings.h"
 #include "CmdOptions.h"
@@ -13,11 +14,17 @@ class CarSettings : public QWidget
   Q_OBJECT
 
 private:
+  //member data
   Ui_CarSettings* m_ui;
-  CarOptionsWidget* m_temp; //TEMP
+  QVector<CarOptionsWidget*> m_carOptionsWidgets;
+  std::shared_ptr<QVector<CarOptions>> m_cars;
+
+  //private functions
+  void setupCarOptionsWidgets();
 
 public:
-  CarSettings(QWidget* parent = nullptr);
+  //constructors
+  CarSettings(std::shared_ptr<QVector<CarOptions>> cars, QWidget* parent = nullptr);
   ~CarSettings();
 
 signals:
