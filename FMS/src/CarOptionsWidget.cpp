@@ -40,7 +40,14 @@ CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidg
   {
     m_ui->cmbEnabled->addItem(option);
   } //end  for (auto option : CMB_ENABLE_STR
-  m_ui->cmbEnabled->setCurrentIndex(static_cast<int>(CmbEnableOptions::PLAYING));
+  if (m_carOptions->getBypassed())
+  {
+    m_ui->cmbEnabled->setCurrentIndex(static_cast<int>(CmbEnableOptions::BYPASSED));
+  } //end  if (m_carOptions->getBypassed())
+  else
+  {
+    m_ui->cmbEnabled->setCurrentIndex(static_cast<int>(CmbEnableOptions::PLAYING));
+  } //end  else
 
   //setup the controller combobox
   int numControllers = MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams;
@@ -48,6 +55,9 @@ CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidg
   {
     m_ui->cmbController->addItem("Controller " + QString::number(i + 1));
   } //end  for (int i = 0; i < numControllers; i++
+
+  //set the text for the team label
+  m_ui->lblTeamName->setText("Team " + QString::number(m_carOptions->getTeam() + 1));
 
   makeConnections();
 }
