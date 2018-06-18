@@ -15,19 +15,16 @@ void CarSettings::setupCarOptionsWidgets()
   m_ui->tblTeamOrg->setRowCount(MatchOptions::m_numberOfTeams);
 
   //create each of the CarOptionsWidgets
-  QMap<int, int> carsAdded;
-  for (auto car : (*m_cars))
+  for (int i = 0; i < m_cars->size(); i++)
   {
-    if (!carsAdded.contains(car.getTeam()))
+    auto team = (*m_cars)[i];
+    for (int j = 0; j < team.size(); j++)
     {
-      carsAdded.insert(car.getTeam(), 0);
-    } //end  if (!carsAdded.contains(car.getTeam()))
-
-    CarOptionsWidget* toAdd = new CarOptionsWidget(std::make_shared<CarOptions>(car), this);
-    m_ui->tblTeamOrg->setCellWidget(car.getTeam(), carsAdded[car.getTeam()], toAdd);
-    carsAdded[car.getTeam()]++;
-  } //end  for (auto car : (*m_cars))
-
+      CarOptionsWidget* toAdd = new CarOptionsWidget(std::make_shared<CarOptions>(team[j]), this);
+      toAdd->show();
+      m_ui->tblTeamOrg->setCellWidget(i, j, toAdd);
+    } //end  for (int j = 0; j < team.size(); j++)
+  } //end  for (int i = 0; i < m_cars->size(); i++
 }
 
 //constructors
