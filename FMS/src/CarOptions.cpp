@@ -2,21 +2,34 @@
 
 extern OutputManager cout;
 
+int CarOptions::defaultCarNameNum = 0;
+
 //private functions
-void CarOptions::init(unsigned int team)
+void CarOptions::init(unsigned int team, QString name)
 {
+  //check if the provided name is blank, if it is, use a default one
+  if (std::all_of(name.toStdString().begin(), name.toStdString().end(), isspace))
+  {
+    m_name = "Car " + QString::number(defaultCarNameNum);
+    defaultCarNameNum++;
+  } //end  if (std::all_of(name.begin(), name.end(), isspace))
+  else
+  {
+    m_name = name;
+  } //end  else
+
   setTeam(team);
   m_bypassed = false; //all cars are enabled by default
 }
 
 //constructors
-CarOptions::CarOptions()
+CarOptions::CarOptions(QString name)
 {
-  init(0);
+  init(0, name);
 }
-CarOptions::CarOptions(unsigned int team)
+CarOptions::CarOptions(unsigned int team, QString name)
 {
-  init(team);
+  init(team, name);
 }
 
 //public functions
@@ -45,6 +58,10 @@ unsigned int CarOptions::getTeam()
 bool CarOptions::getBypassed()
 {
   return m_bypassed;
+}
+QString CarOptions::getName()
+{
+  return m_name;
 }
 
 //setter
