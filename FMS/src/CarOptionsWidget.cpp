@@ -56,8 +56,9 @@ CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidg
     m_ui->cmbController->addItem("Controller " + QString::number(i + 1));
   } //end  for (int i = 0; i < numControllers; i++
 
-  //set the text for the team label
+  //set the text for the labels
   m_ui->lblTeamName->setText("Team " + QString::number(m_carOptions->getTeam() + 1));
+  m_ui->lblCarName->setText("Car " + m_carOptions->getName());
 
   makeConnections();
 }
