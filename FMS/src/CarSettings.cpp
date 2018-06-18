@@ -5,6 +5,22 @@ extern OutputManager cout;
 //private functions
 void CarSettings::setupCarOptionsWidgets()
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarSettings: Setting up layout for being able to edit car options" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //create each of the CarOptionsWidgets
+  for (int i = 0; i < m_cars->size(); i++)
+  {
+    m_carOptionsWidgets.push_back(new CarOptionsWidget(std::make_shared<CarOptions>((*m_cars)[i])));
+  } //end  for (int i = 0; i < m_cars->size(); i++)
+
+  //TEMP
+  for (int i = 0; i < m_cars->size(); i++)
+  {
+    m_carOptionsWidgets[i]->show();
+  }
 }
 
 //constructors
@@ -29,4 +45,10 @@ CarSettings::~CarSettings()
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   delete m_ui;
+
+  //delete all the car options widgets TEMP until the parent system is used
+  for (auto carWidget : m_carOptionsWidgets)
+  {
+    delete carWidget;
+  }
 }
