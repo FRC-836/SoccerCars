@@ -19,3 +19,6 @@ add cmd option for a location to log all console output (log file)
 probably should add checks to stop the user from opening certain windows while a match is running (like Match Settings)
 
 change size of message box warning about closing FMS while match is running to make it wider
+
+go through all output and make sure car name is being used where appropriate
+  should only need to check CarOptions, MatchOptions, and MatchSettings
