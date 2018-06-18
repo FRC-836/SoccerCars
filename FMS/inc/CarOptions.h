@@ -16,12 +16,12 @@ private:
   QString m_name;
 
   //private functions
-  void init(unsigned int team, QString name);
+  void init(unsigned int team, const QString& name);
 
 public:
   //constructors
-  CarOptions(QString name = "");
-  CarOptions(unsigned int team, QString name = "");
+  CarOptions(const QString& name = "");
+  CarOptions(unsigned int team, const QString& name = "");
 
   //public functions
   void bypass();
