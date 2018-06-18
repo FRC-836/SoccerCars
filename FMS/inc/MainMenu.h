@@ -77,6 +77,7 @@ public slots:
   void btnDiagnosticsClickHandler();
   void tmrMatchTimerTimeoutHandler();
   void tmrSecondTimerTimeoutHandler();
+  void matchSettingsUpdateHandler();
 };
 
 #endif

@@ -169,7 +169,10 @@ MainMenu::MainMenu()
 
   //initialize variables
   m_mediaPlayer = std::make_unique<QMediaPlayer>();
+  m_cars = std::make_shared<QVector<CarOptions>>();
   m_matchRunning = false;
+
+  matchSettingsUpdateHandler(); //initial creation of teams and cars
 
   makeConnections();
 }
@@ -202,6 +205,7 @@ void MainMenu::btnMatchSettingsClickHandler()
   {
     MatchSettings* toOpen = new MatchSettings();
     m_openWindows.insert(Windows::MATCH_SETTINGS, toOpen);
+    connect(toOpen, &MatchSettings::settingsUpdated, this, &MainMenu::matchSettingsUpdateHandler);
     connect(toOpen, &MatchSettings::destroyed, this, &MainMenu::matchSettingsClosed);
     toOpen->show();
   } //end  if (m_openWindows.contains(Windows::MATCH_SETTINGS))
@@ -224,7 +228,7 @@ void MainMenu::btnCarSettingsClickHandler()
 
   if (!m_openWindows.contains(Windows::CAR_SETTINGS))
   {
-    CarSettings* toOpen = new CarSettings();
+    CarSettings* toOpen = new CarSettings(m_cars);
     m_openWindows.insert(Windows::CAR_SETTINGS, toOpen);
     connect(toOpen, &CarSettings::destroyed, this, &MainMenu::carSettingsClosed);
     toOpen->show();
@@ -298,4 +302,100 @@ void MainMenu::tmrSecondTimerTimeoutHandler()
 
   //set timer to one less than it currently is
   m_ui->lcdTimer->display(m_ui->lcdTimer->value() - 1);
+}
+void MainMenu::matchSettingsUpdateHandler()
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: recieved match settings update signal" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //------------------------------------------------------------------------------------
+  //modify the car settings vector as appropriate to accomadate new/removed teams
+  //------------------------------------------------------------------------------------
+  int highestTeam = 0; //keeps track of the highest team with a car on it
+  QMap<int, int> carsPerTeam; //keeps track of amount of cars currently on each team
+
+  //check to see if cars need to be removed or added
+  for (int i = m_cars->size() - 1; i >= 0; i--)
+  {
+    //check if car is on a team thats allowed
+    int currentTeam = (*m_cars)[i].getTeam();
+    if (currentTeam >= MatchOptions::m_numberOfTeams)
+    {
+      //new team amount doesn't support cars on this team
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+      {
+        cout << "INFO: MainMenu: Car " << (*m_cars)[i].getName() << " is being removed because its team "
+             << "no longer exists" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+      m_cars->remove(i);
+    } //end  if ((*m_cars)[i].getTeam() >= MatchOptions::m_numberOfTeams)
+    else
+    {
+      //car's team is valid, check to see if there are too many on that team
+      if (carsPerTeam.contains(currentTeam))
+      {
+        if (carsPerTeam[currentTeam] < MatchOptions::m_carsPerTeam)
+        {
+          //car on a valid team that isn't full, add to histogram
+          carsPerTeam[currentTeam]++;
+        } //end  if (carsPerTeam[currentTeam] < MatchOptions::m_carsPerTeam)
+        else
+        {
+          //team is full, remove the car
+          if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+          {
+            cout << "INFO: MainMenu: Team is too full, removing " << (*m_cars)[i].getName() << endl;
+          } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+          m_cars->remove(i);
+        } //end  else
+      } //end  if (carsPerTeam.contains(currentTeam))
+      else
+      {
+        carsPerTeam.insert(currentTeam, 1);
+      } //end  else
+    } //end  else
+
+    //keep track of the highest team seen to see if there needs to be a team added
+    highestTeam = (currentTeam > highestTeam) ? currentTeam : highestTeam;
+  } //end  for (int i = m_cars->size() - 1; i >= 0; i--)
+
+  //see if there are any teams that need cars added
+  for (int i = 0; i < carsPerTeam.size(); i++)
+  {
+    if (carsPerTeam[i] < MatchOptions::m_carsPerTeam)
+    {
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+      {
+        cout << "INFO: MainMenu: team " << i << " is short on teams, adding teams to it" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+      while (carsPerTeam[i] < MatchOptions::m_carsPerTeam)
+      {
+        CarOptions toAdd(i);
+        m_cars->push_back(toAdd);
+        carsPerTeam[i]++;
+      } //end  while (carsPerTeam[i] < MatchOptions::m_carsPerTeam)
+    } //end  if (carsPerTeam[i] < MatchOptions::m_carsPerTeam)
+  } //end  for (auto team : carsPerTeam)
+
+  //add new teams if any need made
+  if (highestTeam < MatchOptions::m_numberOfTeams)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+    {
+      cout << "INFO: MainMenu: not enough teams, adding more" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+    while (highestTeam < MatchOptions::m_numberOfTeams)
+    {
+      highestTeam++;
+      for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
+      {
+        CarOptions toAdd(highestTeam);
+        m_cars->push_back(toAdd);
+      } //end  for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
+    } //end  while (highestTeam < MatchOptions::m_numberOfTeams)
+  } //end  if (highestTeam < MatchOptions::m_numberOfTeams)
 }
