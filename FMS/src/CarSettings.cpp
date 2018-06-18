@@ -10,17 +10,24 @@ void CarSettings::setupCarOptionsWidgets()
     cout << "INFO: CarSettings: Setting up layout for being able to edit car options" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
-  //create each of the CarOptionsWidgets
-  for (int i = 0; i < m_cars->size(); i++)
-  {
-    m_carOptionsWidgets.push_back(new CarOptionsWidget(std::make_shared<CarOptions>((*m_cars)[i])));
-  } //end  for (int i = 0; i < m_cars->size(); i++)
+  //setup the grid
+  m_ui->tblTeamOrg->setColumnCount(MatchOptions::m_carsPerTeam);
+  m_ui->tblTeamOrg->setRowCount(MatchOptions::m_numberOfTeams);
 
-  //TEMP
-  for (int i = 0; i < m_cars->size(); i++)
+  //create each of the CarOptionsWidgets
+  QMap<int, int> carsAdded;
+  for (auto car : (*m_cars))
   {
-    m_carOptionsWidgets[i]->show();
-  }
+    if (!carsAdded.contains(car.getTeam()))
+    {
+      carsAdded.insert(car.getTeam(), 0);
+    } //end  if (!carsAdded.contains(car.getTeam()))
+
+    CarOptionsWidget* toAdd = new CarOptionsWidget(std::make_shared<CarOptions>(car), this);
+    m_ui->tblTeamOrg->setCellWidget(car.getTeam(), carsAdded[car.getTeam()], toAdd);
+    carsAdded[car.getTeam()]++;
+  } //end  for (auto car : (*m_cars))
+
 }
 
 //constructors
