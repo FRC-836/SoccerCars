@@ -8,7 +8,7 @@ int CarOptions::defaultCarNameNum = 0;
 void CarOptions::init(unsigned int team, const QString& name)
 {
   //check if the provided name is blank, if it is, use a default one
-  if (std::all_of(name.toStdString().begin(), name.toStdString().end(), isspace))
+  if (name.trimmed().isEmpty())
   {
     m_name = "Car " + QString::number(defaultCarNameNum);
     defaultCarNameNum++;

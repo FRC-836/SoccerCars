@@ -1,8 +1,6 @@
 #ifndef SOCCER_CARS_FMS_CAR_OPTIONS_H
 #define SOCCER_CARS_FMS_CAR_OPTIONS_H
 
-#include <algorithm>
-
 #include "CmdOptions.h"
 #include "MatchOptions.h"
 
