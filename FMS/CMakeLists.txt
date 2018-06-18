@@ -64,6 +64,7 @@ set(inc inc/CarSettings.h
         inc/MatchOptions.h
         inc/CarOptionsWidget.h
         inc/CarOptions.h
+        inc/UsefulTypes.h
         )
         
 set(forms inc/CarSettings.ui
