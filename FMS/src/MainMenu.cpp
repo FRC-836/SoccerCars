@@ -169,7 +169,7 @@ MainMenu::MainMenu()
 
   //initialize variables
   m_mediaPlayer = std::make_unique<QMediaPlayer>();
-  m_cars = std::make_shared<QVector<CarOptions>>();
+  m_cars = std::make_shared<TeamList_t>();
   m_matchRunning = false;
 
   matchSettingsUpdateHandler(); //initial creation of teams and cars

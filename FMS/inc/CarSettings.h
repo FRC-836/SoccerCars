@@ -8,6 +8,7 @@
 #include "CmdOptions.h"
 #include "OutputManager.h"
 #include "CarOptionsWidget.h"
+#include "UsefulTypes.h"
 
 class CarSettings : public QWidget
 {
@@ -17,14 +18,14 @@ private:
   //member data
   Ui_CarSettings* m_ui;
   QVector<CarOptionsWidget*> m_carOptionsWidgets;
-  std::shared_ptr<QVector<CarOptions>> m_cars;
+  std::shared_ptr<TeamList_t> m_cars;
 
   //private functions
   void setupCarOptionsWidgets();
 
 public:
   //constructors
-  CarSettings(std::shared_ptr<QVector<CarOptions>> cars, QWidget* parent = nullptr);
+  CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent = nullptr);
   ~CarSettings();
 
 signals:

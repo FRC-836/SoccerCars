@@ -31,7 +31,7 @@ void CarSettings::setupCarOptionsWidgets()
 }
 
 //constructors
-CarSettings::CarSettings(std::shared_ptr<QVector<CarOptions>> cars, QWidget* parent) :
+CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
   QWidget(parent)
 {
   setAttribute(Qt::WA_DeleteOnClose);
