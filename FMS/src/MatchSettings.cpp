@@ -34,8 +34,10 @@ void MatchSettings::guiToItem()
 
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
   {
-    cout << "INFO: Match Settings: Saved match settings" << endl;
+    cout << "INFO: MatchSettings: Saved match settings" << endl;
+    cout << "INFO: MatchSettings: emitting the settings updated signal" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  emit settingsUpdated();
 }
 bool MatchSettings::unsavedChanges()
 {
