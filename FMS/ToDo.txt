@@ -22,3 +22,6 @@ change size of message box warning about closing FMS while match is running to m
 
 go through all output and make sure car name is being used where appropriate
   should only need to check CarOptions, MatchOptions, and MatchSettings
+  
+disable up and down team button when they are unable to be used
+get rid of top and left numbers in car options grid
