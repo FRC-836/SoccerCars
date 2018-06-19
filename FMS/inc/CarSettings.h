@@ -3,6 +3,7 @@
 
 #include <qwidget.h>
 #include <qvector.h>
+#include <qevent.h>
 
 #include "ui_CarSettings.h"
 #include "CmdOptions.h"
@@ -22,6 +23,9 @@ private:
 
   //private functions
   void setupCarOptionsWidgets();
+
+protected:
+  void resizeEvent(QResizeEvent* event) override;
 
 public:
   //constructors
