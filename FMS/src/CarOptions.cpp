@@ -5,7 +5,7 @@ extern OutputManager cout;
 int CarOptions::defaultCarNameNum = 0;
 
 //private functions
-void CarOptions::init(unsigned int team, const QString& name)
+void CarOptions::init(unsigned int team, unsigned int controller, const QString& name)
 {
   //check if the provided name is blank, if it is, use a default one
   if (name.trimmed().isEmpty())
@@ -19,17 +19,22 @@ void CarOptions::init(unsigned int team, const QString& name)
   } //end  else
 
   setTeam(team);
+  setController(controller);
   m_bypassed = false; //all cars are enabled by default
 }
 
 //constructors
 CarOptions::CarOptions(const QString& name)
 {
-  init(0, name);
+  init(0, 0, name);
 }
 CarOptions::CarOptions(unsigned int team, const QString& name)
 {
-  init(team, name);
+  init(team, 0, name);
+}
+CarOptions::CarOptions(unsigned int team, unsigned int controller, const QString& name = "")
+{
+  init(team, controller, name);
 }
 
 //public functions
@@ -55,6 +60,10 @@ unsigned int CarOptions::getTeam()
 {
   return m_team;
 }
+unsigned int CarOptions::getController()
+{
+  return m_controller;
+}
 bool CarOptions::getBypassed()
 {
   return m_bypassed;
@@ -77,6 +86,21 @@ void CarOptions::setTeam(unsigned int team)
     {
       cout << "ERROR: CarOptions: cannot set team to a negative number. Team remains unchanged" 
            << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  else
+}
+void CarOptions::setController(unsigned int controller)
+{
+  if (controller >= 0)
+  {
+    m_controller = controller;
+  } //end  if (controller >= 0)
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: CarOptions: cannot set controller to a negative number. Controller remains "
+           << "unchanged" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
   } //end  else
 }

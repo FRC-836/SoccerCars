@@ -10,16 +10,18 @@ private:
   static int defaultCarNameNum;
   //member data
   unsigned int m_team;
+  unsigned int m_controller;
   bool m_bypassed;
   QString m_name;
 
   //private functions
-  void init(unsigned int team, const QString& name);
+  void init(unsigned int team, unsigned int controller, const QString& name);
 
 public:
   //constructors
   CarOptions(const QString& name = "");
   CarOptions(unsigned int team, const QString& name = "");
+  CarOptions(unsigned int team, unsigned int controller, const QString& name = "");
 
   //public functions
   void bypass();
@@ -27,11 +29,13 @@ public:
 
   //getters
   unsigned int getTeam();
+  unsigned int getController();
   bool getBypassed();
   QString getName();
 
   //setters
   void setTeam(unsigned int team);
+  void setController(unsigned int controller);
 };
 
 #endif
