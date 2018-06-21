@@ -29,6 +29,11 @@ void CarSettings::setupCarOptionsWidgets()
 //event handlers
 void CarSettings::resizeEvent(QResizeEvent* event)
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarSettings: Handling resize event" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
   //set the column sizes
   int columnWidth = m_ui->tblTeamOrg->size().width() / m_ui->tblTeamOrg->columnCount();
   for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)

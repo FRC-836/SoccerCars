@@ -231,6 +231,8 @@ void MainMenu::btnCarSettingsClickHandler()
     CarSettings* toOpen = new CarSettings(m_cars);
     m_openWindows.insert(Windows::CAR_SETTINGS, toOpen);
     connect(toOpen, &CarSettings::destroyed, this, &MainMenu::carSettingsClosed);
+
+    toOpen->resize(658, 480); //TEMP until resize algo based on team/cars is established
     toOpen->show();
   } //end  if (!m_openWindows.contains(Windows::CAR_SETTINGS))
   else
