@@ -31,3 +31,4 @@ fix bug where with 4 teams and 2 cars per a random one gets added to the top rig
 set default size to height: 480, width: 658
 
 add protection from setting controller or team too high (based on MatchOptions)
+set minimum number of teams to 2 in the UI file for MatchSettings
