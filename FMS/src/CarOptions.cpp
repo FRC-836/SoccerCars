@@ -32,7 +32,7 @@ CarOptions::CarOptions(unsigned int team, const QString& name)
 {
   init(team, 0, name);
 }
-CarOptions::CarOptions(unsigned int team, unsigned int controller, const QString& name = "")
+CarOptions::CarOptions(unsigned int team, unsigned int controller, const QString& name)
 {
   init(team, controller, name);
 }
