@@ -328,7 +328,7 @@ void MainMenu::matchSettingsUpdateHandler()
       Team_t toAdd;
       for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
       {
-        toAdd.push_back(CarOptions(m_cars->size() + 1));
+        toAdd.push_back(CarOptions(m_cars->size()));
       }
       m_cars->push_back(toAdd);
     } //end  while (m_cars->size() < MatchOptions::m_numberOfTeams)
