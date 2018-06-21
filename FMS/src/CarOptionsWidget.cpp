@@ -14,10 +14,8 @@ void CarOptionsWidget::makeConnections()
   connect(m_ui->btnDownTeam, &QPushButton::clicked, this, &CarOptionsWidget::btnDownTeamClickHandler);
   connect(m_ui->btnIndicate, &QPushButton::clicked, this, &CarOptionsWidget::btnIndicateClickHandler);
   connect(m_ui->btnUpTeam, &QPushButton::clicked, this, &CarOptionsWidget::btnUpTeamClickHandler);
-  connect(m_ui->cmbController, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-          this, &CarOptionsWidget::cmbControllerValChangeHandler);
-  connect(m_ui->cmbEnabled, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-          this, &CarOptionsWidget::cmbBypassValChangeHandler);
+  connect(m_ui->cmbController, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &CarOptionsWidget::cmbControllerValChangeHandler);
+  connect(m_ui->cmbEnabled, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &CarOptionsWidget::cmbBypassValChangeHandler);
 }
 
 //constructors
