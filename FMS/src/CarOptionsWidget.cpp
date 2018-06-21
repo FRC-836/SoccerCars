@@ -53,6 +53,7 @@ CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidg
   {
     m_ui->cmbController->addItem("Controller " + QString::number(i + 1));
   } //end  for (int i = 0; i < numControllers; i++
+  m_ui->cmbController->setCurrentIndex(m_carOptions->getController());
 
   //set the text for the labels
   m_ui->lblTeamName->setText("Team " + QString::number(m_carOptions->getTeam() + 1));
@@ -148,6 +149,14 @@ void CarOptionsWidget::cmbControllerValChangeHandler(int newIndex)
   {
     cout << "INFO: CarOptionsWidget: controller combo box value changed" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  m_carOptions->setController(newIndex);
+
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarOptionsWidget: emitting controller changed signal with " << newIndex << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  emit controllerChanged(newIndex);
 }
 void CarOptionsWidget::cmbBypassValChangeHandler(int newIndex)
 {
