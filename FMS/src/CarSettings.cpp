@@ -55,8 +55,10 @@ CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
   m_ui = new Ui_CarSettings;
   m_ui->setupUi(this);
 
+  //setup the table
   m_ui->tblTeamOrg->horizontalHeader()->setVisible(false);
   m_ui->tblTeamOrg->verticalHeader()->setVisible(false);
+  m_ui->tblTeamOrg->setSelectionMode(QAbstractItemView::SelectionMode::NoSelection);
 
   //create the grid
   setupCarOptionsWidgets();
