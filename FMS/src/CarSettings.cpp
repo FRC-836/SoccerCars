@@ -15,10 +15,10 @@ void CarSettings::setupCarOptionsWidgets()
   m_ui->tblTeamOrg->setRowCount(MatchOptions::m_numberOfTeams);
 
   //create each of the CarOptionsWidgets
-  for (int i = 0; i < m_cars->size(); i++)
+  for (int i = 0; i < m_cars->size(); i++) //team iteration
   {
     auto team = (*m_cars)[i];
-    for (int j = 0; j < team.size(); j++)
+    for (int j = 0; j < team.size(); j++) //car iteration
     {
       CarOptionsWidget* toAdd = new CarOptionsWidget(std::make_shared<CarOptions>(team[j]), this);
       m_ui->tblTeamOrg->setCellWidget(i, j, toAdd);
@@ -29,11 +29,6 @@ void CarSettings::setupCarOptionsWidgets()
 //event handlers
 void CarSettings::resizeEvent(QResizeEvent* event)
 {
-  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  {
-    cout << "INFO: CarSettings: Handling resize event" << endl;
-  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-
   //set the column sizes
   int columnWidth = m_ui->tblTeamOrg->size().width() / m_ui->tblTeamOrg->columnCount();
   for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
