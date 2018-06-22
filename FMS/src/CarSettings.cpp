@@ -33,7 +33,7 @@ void CarSettings::resizeEvent(QResizeEvent* event)
   int columnWidth = m_ui->tblTeamOrg->size().width() / m_ui->tblTeamOrg->columnCount();
   for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
   {
-    m_ui->tblTeamOrg->setColumnWidth(i, columnWidth - 10);
+    m_ui->tblTeamOrg->setColumnWidth(i, columnWidth);
   } //end  for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
 
   //set the row sizes
@@ -56,6 +56,7 @@ CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
   m_ui->setupUi(this);
 
   m_ui->tblTeamOrg->horizontalHeader()->setVisible(false);
+  m_ui->tblTeamOrg->verticalHeader()->setVisible(false);
 
   //create the grid
   setupCarOptionsWidgets();
