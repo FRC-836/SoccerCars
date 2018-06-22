@@ -26,8 +26,6 @@ go through all output and make sure car name is being used where appropriate
 disable up and down team button when they are unable to be used
 get rid of top and left numbers in car options grid
 
-fix bug where with 4 teams and 2 cars per a random one gets added to the top right of the widget
-
 set default size to height: 480, width: 658
 
 add protection from setting controller or team too high (based on MatchOptions)

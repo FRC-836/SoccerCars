@@ -349,7 +349,7 @@ void MainMenu::matchSettingsUpdateHandler()
   } //end  else if (m_cars->size() > MatchOptions::m_numberOfTeams)
 
   int index = 0;
-  for (auto team : (*m_cars))
+  for (auto& team : (*m_cars))
   {
     if (team.size() > MatchOptions::m_carsPerTeam)
     {
@@ -381,5 +381,5 @@ void MainMenu::matchSettingsUpdateHandler()
       }
     } //end  else if (team.size() < MatchOptions::m_carsPerTeam)
     index++;
-  } //end  for (auto team : m_cars)
+  } //end  for (auto& team : m_cars)
 }
