@@ -328,7 +328,7 @@ void MainMenu::matchSettingsUpdateHandler()
       Team_t toAdd;
       for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
       {
-        toAdd.push_back(CarOptions(m_cars->size()));
+        toAdd.push_back(std::make_shared<CarOptions>(m_cars->size()));
       }
       m_cars->push_back(toAdd);
     } //end  while (m_cars->size() < MatchOptions::m_numberOfTeams)
@@ -356,7 +356,7 @@ void MainMenu::matchSettingsUpdateHandler()
       //too many cars on this team
       if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
       {
-        cout << "INFO: MainMenu: too many cars on team " << team[0].getTeam() 
+        cout << "INFO: MainMenu: too many cars on team " << team[0]->getTeam() 
              << " removing extra" << endl;
       } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
 
@@ -370,13 +370,13 @@ void MainMenu::matchSettingsUpdateHandler()
       //not enough cars on this team
       if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
       {
-        cout << "INFO: MainMenu: not enough cars on team " << team[0].getTeam()
+        cout << "INFO: MainMenu: not enough cars on team " << team[0]->getTeam()
              << " adding cars" << endl;
       }
 
       while (team.size() < MatchOptions::m_carsPerTeam)
       {
-        CarOptions toAdd(index);
+        std::shared_ptr<CarOptions> toAdd = std::make_shared<CarOptions>(index);
         team.push_back(toAdd);
       }
     } //end  else if (team.size() < MatchOptions::m_carsPerTeam)
