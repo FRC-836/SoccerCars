@@ -20,7 +20,7 @@ void CarSettings::setupCarOptionsWidgets()
     auto team = (*m_cars)[i];
     for (int j = 0; j < team.size(); j++) //car iteration
     {
-      CarOptionsWidget* toAdd = new CarOptionsWidget(std::make_shared<CarOptions>(team[j]), this);
+      CarOptionsWidget* toAdd = new CarOptionsWidget(team[j], this);
       m_ui->tblTeamOrg->setCellWidget(i, j, toAdd);
     } //end  for (int j = 0; j < team.size(); j++)
   } //end  for (int i = 0; i < m_cars->size(); i++
