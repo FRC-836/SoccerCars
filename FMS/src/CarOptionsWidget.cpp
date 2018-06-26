@@ -107,7 +107,8 @@ void CarOptionsWidget::btnDownTeamClickHandler()
     //emit the team chaged signal
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
     {
-      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
+      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam 
+           << " and old team " << oldTeam << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
     emit teamChange(newTeam, oldTeam);
   } //end  else
@@ -141,7 +142,8 @@ void CarOptionsWidget::btnUpTeamClickHandler()
     //emit the team chaged signal
     if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
     {
-      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
+      cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam 
+           << " and old team " << oldTeam << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
     emit teamChange(newTeam, oldTeam);
   } //end  else
@@ -169,7 +171,8 @@ void CarOptionsWidget::cmbControllerValChangeHandler(int newIndex)
 
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
-    cout << "INFO: CarOptionsWidget: emitting controller changed signal with " << newIndex << endl;
+    cout << "INFO: CarOptionsWidget: emitting controller changed signal with " << newIndex 
+         << " and old controller " << oldController << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   emit controllerChanged(newIndex, oldController);
 }
