@@ -71,6 +71,12 @@ CarOptionsWidget::~CarOptionsWidget()
   delete m_ui;
 }
 
+//getters
+const CarOptions& CarOptionsWidget::getCar() const
+{
+  return *m_carOptions;
+}
+
 //public slots
 void CarOptionsWidget::btnDownTeamClickHandler()
 {

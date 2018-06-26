@@ -36,6 +36,9 @@ public:
   CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidget* parent = nullptr);
   ~CarOptionsWidget();
 
+  //getters
+  const CarOptions& getCar() const;
+
 signals:
   /**
    * emitted when the user has clicked a button to change which team this car
