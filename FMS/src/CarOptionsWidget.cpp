@@ -57,7 +57,7 @@ CarOptionsWidget::CarOptionsWidget(std::shared_ptr<CarOptions> carOptions, QWidg
 
   //set the text for the labels
   m_ui->lblTeamName->setText("Team " + QString::number(m_carOptions->getTeam() + 1));
-  m_ui->lblCarName->setText("Car " + m_carOptions->getName());
+  m_ui->lblCarName->setText(m_carOptions->getName());
 
   makeConnections();
 }
