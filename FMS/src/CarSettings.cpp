@@ -78,3 +78,34 @@ CarSettings::~CarSettings()
     delete carWidget;
   }
 }
+
+//public slots
+void CarSettings::teamChangeHandler(int newTeam, int oldTeam)
+{
+  //ensure the sender is a valid CarOptionsWidge`
+  CarOptionsWidget* carSender = qobject_cast<CarOptionsWidget*>(sender());
+  if (carSender != nullptr)
+  {
+    //get the car from the sender
+    auto car = carSender->getCar();
+
+    //move the car to its new team
+  } //end  if (carSender != nullptr)
+  else
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: CarSettings: recieved team change signal from something "
+           << "that isn't a CarOptionsWidget. Ignoring request" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+  } //end  else
+}
+void CarSettings::bypassStateChangedHandler(bool bypassed)
+{
+}
+void CarSettings::controllerChangedHandler(int newController)
+{
+}
+void CarSettings::indicateRequestedHandler()
+{
+}

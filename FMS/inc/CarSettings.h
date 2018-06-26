@@ -35,6 +35,10 @@ public:
 signals:
 
 public slots:
+  void teamChangeHandler(int newTeam, int oldTeam);
+  void bypassStateChangedHandler(bool bypassed);
+  void controllerChangedHandler(int newController);
+  void indicateRequestedHandler();
 
 };
 
