@@ -21,7 +21,7 @@ void CarSettings::setupCarOptionsWidgets()
     for (int j = 0; j < team.size(); j++) //car iteration
     {
       CarOptionsWidget* toAdd = new CarOptionsWidget(team[j], this);
-      m_ui->tblTeamOrg->setCellWidget(i, j, toAdd);
+      m_ui->tblTeamOrg->setCellWidget(m_cars->size() - i - 1, j, toAdd);
     } //end  for (int j = 0; j < team.size(); j++)
   } //end  for (int i = 0; i < m_cars->size(); i++
 }
