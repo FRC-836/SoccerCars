@@ -97,6 +97,9 @@ void CarOptionsWidget::btnDownTeamClickHandler()
   } //end  if (newTeam < 0)
   else
   {
+    //old team for the purposes of sending the signal
+    int oldTeam = m_carOptions->getTeam();
+
     //set new team and update label
     m_carOptions->setTeam(newTeam);
     m_ui->lblTeamName->setText("Team " + QString::number(newTeam + 1));
@@ -106,7 +109,7 @@ void CarOptionsWidget::btnDownTeamClickHandler()
     {
       cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    emit teamChange(newTeam);
+    emit teamChange(newTeam, oldTeam);
   } //end  else
 }
 void CarOptionsWidget::btnUpTeamClickHandler()
@@ -128,6 +131,9 @@ void CarOptionsWidget::btnUpTeamClickHandler()
   } //end  if (newTeam >= MatchOptions::m_numberOfTeams)
   else
   {
+    //old team for the purposes of sending the signal
+    int oldTeam = m_carOptions->getTeam();
+
     //set new team and update label
     m_carOptions->setTeam(newTeam);
     m_ui->lblTeamName->setText("Team " + QString::number(newTeam + 1));
@@ -137,7 +143,7 @@ void CarOptionsWidget::btnUpTeamClickHandler()
     {
       cout << "INFO: CarOptionsWidget: emitting team change signal with new team " << newTeam << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-    emit teamChange(newTeam);
+    emit teamChange(newTeam, oldTeam);
   } //end  else
 }
 void CarOptionsWidget::btnIndicateClickHandler()
@@ -156,13 +162,16 @@ void CarOptionsWidget::cmbControllerValChangeHandler(int newIndex)
     cout << "INFO: CarOptionsWidget: controller combo box value changed" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
+  //old controller for the purposes of sending the signal
+  int oldController = m_carOptions->getController();
+  
   m_carOptions->setController(newIndex);
 
   if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
   {
     cout << "INFO: CarOptionsWidget: emitting controller changed signal with " << newIndex << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
-  emit controllerChanged(newIndex);
+  emit controllerChanged(newIndex, oldController);
 }
 void CarOptionsWidget::cmbBypassValChangeHandler(int newIndex)
 {

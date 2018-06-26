@@ -46,7 +46,7 @@ signals:
    *
    * @param newTeam: the number of the team the car is being assigned to
    */
-  void teamChange(int newTeam);
+  void teamChange(int newTeam, int oldTeam);
   /**
    * emitted when the user changes wether or not this car is bypassed
    *
@@ -58,7 +58,7 @@ signals:
    *
    * @param newController: number of the controller now assigned to this car
    */
-  void controllerChanged(int newController);
+  void controllerChanged(int newController, int oldController);
   /**
    * emitted when the user presses the "indicate" button, requesting the car
    * enter the state where it is identifiable. Possibly by lighting up some
