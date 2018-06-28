@@ -23,6 +23,7 @@ private:
 
   //private functions
   void setupCarOptionsWidgets();
+  void makeConnections();
 
 protected:
   void resizeEvent(QResizeEvent* event) override;
