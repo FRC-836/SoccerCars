@@ -82,8 +82,9 @@ CarSettings::~CarSettings()
 //public slots
 void CarSettings::teamChangeHandler(int newTeam, int oldTeam)
 {
-  //ensure the sender is a valid CarOptionsWidge`
+  //ensure the sender is a valid CarOptionsWidge
   CarOptionsWidget* carSender = qobject_cast<CarOptionsWidget*>(sender());
+  int test = m_ui->tblTeamOrg->column(carSender);
   if (carSender != nullptr)
   {
     //get the car from the sender

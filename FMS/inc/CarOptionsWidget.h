@@ -5,6 +5,7 @@
 
 #include <qwidget.h>
 #include <qmap.h>
+#include <qtablewidget.h>
 
 #include "ui_CarOptionsWidget.h"
 #include "OutputManager.h"
@@ -12,7 +13,7 @@
 #include "MatchOptions.h"
 #include "CarOptions.h"
 
-class CarOptionsWidget : public QWidget
+class CarOptionsWidget : public QWidget, public QTableWidgetItem
 {
   Q_OBJECT
 private:
