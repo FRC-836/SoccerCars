@@ -11,8 +11,15 @@ void CarSettings::setupCarOptionsWidgets()
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
   //setup the grid (rows and columns)
-  m_ui->tblTeamOrg->setColumnCount(MatchOptions::m_carsPerTeam);
   m_ui->tblTeamOrg->setRowCount(MatchOptions::m_numberOfTeams);
+  int maxTeamSize = 0;
+  for (int i = 0; i < m_cars->size(); i++)
+  {
+    //since teams can have uneven numbers of teams during the car assignment, can't simply make
+    //grid based on setting's team size
+    maxTeamSize = ((*m_cars)[i].size() > maxTeamSize) ? (*m_cars)[i].size() : maxTeamSize;
+  } //end  for (int i = 0; i < m_cars->size(); i++)
+  m_ui->tblTeamOrg->setColumnCount(maxTeamSize);
 
   //create each of the CarOptionsWidgets
   for (int i = 0; i < m_cars->size(); i++) //team iteration
