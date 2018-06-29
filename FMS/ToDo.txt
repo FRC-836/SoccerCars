@@ -34,6 +34,9 @@ set minimum number of teams to 2 in the UI file for MatchSettings
 investigate if cars can be set to a team that doesn't exist on construction (i.e. construct a car on team 3 even if there are only 2 teams)
 
 set minimum size for cells im the CarSettings UI
+  this should be done by setting the appropriate functions for CarOptionsWidget
+    size hint
+    min size
 
 switch the order of rows in the car settings window. the lowest team should be on the bottom
 
