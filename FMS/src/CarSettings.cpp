@@ -10,6 +10,9 @@ void CarSettings::setupCarOptionsWidgets()
     cout << "INFO: CarSettings: Setting up layout for being able to edit car options" << endl;
   } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
 
+  //wipe the table for starting clean
+  m_ui->tblTeamOrg->clear();
+
   //setup the grid (rows and columns)
   m_ui->tblTeamOrg->setRowCount(MatchOptions::m_numberOfTeams);
   int maxTeamSize = 0;
@@ -32,6 +35,10 @@ void CarSettings::setupCarOptionsWidgets()
       m_ui->tblTeamOrg->setCellWidget(m_cars->size() - i - 1, j, toAdd);
     } //end  for (int j = 0; j < team.size(); j++)
   } //end  for (int i = 0; i < m_cars->size(); i++
+
+  //post a resize event
+  QResizeEvent* e = new QResizeEvent(QSize(10, 10), size());
+  QCoreApplication::postEvent(this, e);
 }
 void CarSettings::makeConnections()
 {
@@ -53,6 +60,9 @@ void CarSettings::resizeEvent(QResizeEvent* event)
   {
     m_ui->tblTeamOrg->setRowHeight(i, rowHeight - 10);
   } //end  for (int i = 0; i < m_ui->tblTeamOrg->rowCount(); i++)
+
+  //call base class (this is why i don't have to accept the event)
+  QWidget::resizeEvent(event);
 }
 
 //constructors
