@@ -86,15 +86,31 @@ CarSettings::~CarSettings()
 //public slots
 void CarSettings::teamChangeHandler(int newTeam, int oldTeam)
 {
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: CarSettings: recieved signal that a team change request has been made" << endl;
+    cout << "\told team: " << oldTeam << ", newTeam: " << newTeam << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
   //ensure the sender is a valid CarOptionsWidge
   CarOptionsWidget* carSender = qobject_cast<CarOptionsWidget*>(sender());
-  int test = m_ui->tblTeamOrg->column(carSender);
   if (carSender != nullptr)
   {
+    //get the column the sender is from
+    auto column = carSender->pos().x() / carSender->width();
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+    {
+      cout << "INFO: CarSettings: column of the requesting the team change is " << column << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
     //get the car from the sender
     auto car = carSender->getCar();
 
     //move the car to its new team
+    (*m_cars)[oldTeam].remove(column);
+    (*m_cars)[newTeam].push_back(std::make_shared<decltype(car)>(car));
+
+    setupCarOptionsWidgets();
   } //end  if (carSender != nullptr)
   else
   {
