@@ -64,6 +64,62 @@ void CarSettings::resizeEvent(QResizeEvent* event)
   //call base class (this is why i don't have to accept the event)
   QWidget::resizeEvent(event);
 }
+void CarSettings::closeEvent(QCloseEvent* event)
+{
+  //check that all teams have an appropriate ammount of cars on them
+  QVector<int> tooLargeTeams; //contains all the teams that are too full
+  QSet<int> controllersUsed; //hold the controllers useed
+  QVector<std::pair<int, int>> bypassedCars; //vector of <team, car> for bypassed cars
+
+  //iterate over teams
+  for (int i = 0; i < m_cars->size(); i++)
+  {
+    if ((*m_cars)[i].size() > MatchOptions::m_carsPerTeam)
+    {
+      tooLargeTeams.push_back(i);
+    } //end  if ((*m_cars)[i].size() >= MatchOptions::m_carsPerTeam)
+
+    //iterate over cars on team
+    for (int j = 0; j < (*m_cars)[i].size(); j++)
+    {
+      controllersUsed.insert((*m_cars)[i][j]->getController());
+      if ((*m_cars)[i][j]->getBypassed())
+      {
+        bypassedCars.push_back(std::make_pair(i, j));
+      } //end  if ((*m_cars)[i][j]->getBypassed())
+    } //end  for (int j = 0; j < (*m_cars)[i].size(); j++)
+  } //end  for (int i = 0; i < m_cars->size(); i++)
+
+  if (!tooLargeTeams.isEmpty())
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERORR: CarSettings: Can't close, there are teams that have too many cars" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    event->ignore();
+    return;
+  } //end  if (!tooLargeTeams.isEmpty())
+
+  if (controllersUsed.size() != MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams)
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    {
+      cout << "ERROR: CarSettings: There is at least one controller being used more than once" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    event->ignore();
+    return;
+  }//end if(controllersUsed.size() != MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams)
+
+  if (!bypassedCars.isEmpty())
+  {
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+    {
+      cout << "WARNING: CarSettings: There are cars that are set to be bypassed" << endl;
+    } //end  if (CmdOptions::verbosity > +CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
+  } //end  if (!bypassedCars.isEmpty())
+
+  QWidget::closeEvent(event);
+}
 
 //constructors
 CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :

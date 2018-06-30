@@ -1,9 +1,12 @@
 #ifndef SOCCER_CARS_FMS_CONNECT_H
 #define SOCCER_CARS_FMS_CONNECT_H
 
+#include <utility>
+
 #include <qwidget.h>
 #include <qvector.h>
 #include <qevent.h>
+#include <qset.h>
 
 #include "ui_CarSettings.h"
 #include "CmdOptions.h"
@@ -27,6 +30,7 @@ private:
 
 protected:
   void resizeEvent(QResizeEvent* event) override;
+  void closeEvent(QCloseEvent* event) override;
 
 public:
   //constructors
