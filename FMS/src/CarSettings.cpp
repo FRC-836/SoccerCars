@@ -136,11 +136,18 @@ void CarSettings::closeEvent(QCloseEvent* event)
 CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
   QWidget(parent)
 {
+  //force deconstruction on close
   setAttribute(Qt::WA_DeleteOnClose);
 
+  //store the current car settings
   m_cars = cars;
-  m_tmrOptionsCheck = new QTimer(this);
 
+  //configure timer that will check if the options are good
+  m_tmrOptionsCheck = new QTimer(this);
+  m_tmrOptionsCheck->setInterval(100);
+  m_tmrOptionsCheck->start();
+
+  //configure the UI
   m_ui = new Ui_CarSettings;
   m_ui->setupUi(this);
 
@@ -151,6 +158,8 @@ CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
 
   //create the grid
   setupCarOptionsWidgets();
+
+  makeConnections();
 }
 CarSettings::~CarSettings()
 {
