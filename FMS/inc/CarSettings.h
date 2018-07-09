@@ -7,6 +7,8 @@
 #include <qvector.h>
 #include <qevent.h>
 #include <qset.h>
+#include <qpointer.h>
+#include <qtimer.h>
 
 #include "ui_CarSettings.h"
 #include "CmdOptions.h"
@@ -23,10 +25,14 @@ private:
   Ui_CarSettings* m_ui;
   QVector<CarOptionsWidget*> m_carOptionsWidgets;
   std::shared_ptr<TeamList_t> m_cars;
+  QPointer<QTimer> m_tmrOptionsCheck;;
 
   //private functions
   void setupCarOptionsWidgets();
   void makeConnections();
+
+private slots:
+  bool optionsGood();
 
 protected:
   void resizeEvent(QResizeEvent* event) override;

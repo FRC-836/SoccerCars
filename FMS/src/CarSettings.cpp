@@ -42,29 +42,11 @@ void CarSettings::setupCarOptionsWidgets()
 }
 void CarSettings::makeConnections()
 {
+  connect(m_tmrOptionsCheck, &QTimer::timeout, this, &CarSettings::optionsGood);
 }
 
-//event handlers
-void CarSettings::resizeEvent(QResizeEvent* event)
-{
-  //set the column sizes
-  int columnWidth = m_ui->tblTeamOrg->size().width() / m_ui->tblTeamOrg->columnCount();
-  for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
-  {
-    m_ui->tblTeamOrg->setColumnWidth(i, columnWidth);
-  } //end  for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
-
-  //set the row sizes
-  int rowHeight = m_ui->tblTeamOrg->size().height() / m_ui->tblTeamOrg->rowCount();
-  for (int i = 0; i < m_ui->tblTeamOrg->rowCount(); i++)
-  {
-    m_ui->tblTeamOrg->setRowHeight(i, rowHeight - 10);
-  } //end  for (int i = 0; i < m_ui->tblTeamOrg->rowCount(); i++)
-
-  //call base class (this is why i don't have to accept the event)
-  QWidget::resizeEvent(event);
-}
-void CarSettings::closeEvent(QCloseEvent* event)
+//private slots
+bool CarSettings::optionsGood()
 {
   //check that all teams have an appropriate ammount of cars on them
   QVector<int> tooLargeTeams; //contains all the teams that are too full
@@ -96,8 +78,7 @@ void CarSettings::closeEvent(QCloseEvent* event)
     {
       cout << "ERORR: CarSettings: Can't close, there are teams that have too many cars" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-    event->ignore();
-    return;
+    return false;
   } //end  if (!tooLargeTeams.isEmpty())
 
   if (controllersUsed.size() != MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams)
@@ -106,8 +87,7 @@ void CarSettings::closeEvent(QCloseEvent* event)
     {
       cout << "ERROR: CarSettings: There is at least one controller being used more than once" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
-    event->ignore();
-    return;
+    return false;
   }//end if(controllersUsed.size() != MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams)
 
   if (!bypassedCars.isEmpty())
@@ -117,8 +97,39 @@ void CarSettings::closeEvent(QCloseEvent* event)
       cout << "WARNING: CarSettings: There are cars that are set to be bypassed" << endl;
     } //end  if (CmdOptions::verbosity > +CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
   } //end  if (!bypassedCars.isEmpty())
+  return true;
+}
 
-  QWidget::closeEvent(event);
+//event handlers
+void CarSettings::resizeEvent(QResizeEvent* event)
+{
+  //set the column sizes
+  int columnWidth = m_ui->tblTeamOrg->size().width() / m_ui->tblTeamOrg->columnCount();
+  for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
+  {
+    m_ui->tblTeamOrg->setColumnWidth(i, columnWidth);
+  } //end  for (int i = 0; i < m_ui->tblTeamOrg->columnCount(); i++)
+
+  //set the row sizes
+  int rowHeight = m_ui->tblTeamOrg->size().height() / m_ui->tblTeamOrg->rowCount();
+  for (int i = 0; i < m_ui->tblTeamOrg->rowCount(); i++)
+  {
+    m_ui->tblTeamOrg->setRowHeight(i, rowHeight - 10);
+  } //end  for (int i = 0; i < m_ui->tblTeamOrg->rowCount(); i++)
+
+  //call base class (this is why i don't have to accept the event)
+  QWidget::resizeEvent(event);
+}
+void CarSettings::closeEvent(QCloseEvent* event)
+{
+  if (optionsGood())
+  {
+    QWidget::closeEvent(event);
+  } //end  if (optionsGood())
+  else
+  {
+    event->ignore();
+  } //end  else
 }
 
 //constructors
@@ -128,6 +139,7 @@ CarSettings::CarSettings(std::shared_ptr<TeamList_t> cars, QWidget* parent) :
   setAttribute(Qt::WA_DeleteOnClose);
 
   m_cars = cars;
+  m_tmrOptionsCheck = new QTimer(this);
 
   m_ui = new Ui_CarSettings;
   m_ui->setupUi(this);
