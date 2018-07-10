@@ -78,6 +78,7 @@ bool CarSettings::optionsGood()
     {
       cout << "ERORR: CarSettings: Can't close, there are teams that have too many cars" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    m_ui->lblErrorList->setText("One team has too many cars");
     return false;
   } //end  if (!tooLargeTeams.isEmpty())
 
@@ -87,6 +88,7 @@ bool CarSettings::optionsGood()
     {
       cout << "ERROR: CarSettings: There is at least one controller being used more than once" << endl;
     } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+    m_ui->lblErrorList->setText("At least one controller is used more than once");
     return false;
   }//end if(controllersUsed.size() != MatchOptions::m_carsPerTeam * MatchOptions::m_numberOfTeams)
 
@@ -97,6 +99,7 @@ bool CarSettings::optionsGood()
       cout << "WARNING: CarSettings: There are cars that are set to be bypassed" << endl;
     } //end  if (CmdOptions::verbosity > +CmdOptions::DEBUG_LEVEL::ERRORS_AND_WARNINGS)
   } //end  if (!bypassedCars.isEmpty())
+  m_ui->lblErrorList->setText("");
   return true;
 }
 
