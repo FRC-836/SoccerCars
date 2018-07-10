@@ -169,7 +169,10 @@ MainMenu::MainMenu()
 
   //initialize variables
   m_mediaPlayer = std::make_unique<QMediaPlayer>();
+  m_cars = std::make_shared<TeamList_t>();
   m_matchRunning = false;
+
+  matchSettingsUpdateHandler(); //initial creation of teams and cars
 
   makeConnections();
 }
@@ -202,6 +205,7 @@ void MainMenu::btnMatchSettingsClickHandler()
   {
     MatchSettings* toOpen = new MatchSettings();
     m_openWindows.insert(Windows::MATCH_SETTINGS, toOpen);
+    connect(toOpen, &MatchSettings::settingsUpdated, this, &MainMenu::matchSettingsUpdateHandler);
     connect(toOpen, &MatchSettings::destroyed, this, &MainMenu::matchSettingsClosed);
     toOpen->show();
   } //end  if (m_openWindows.contains(Windows::MATCH_SETTINGS))
@@ -224,9 +228,11 @@ void MainMenu::btnCarSettingsClickHandler()
 
   if (!m_openWindows.contains(Windows::CAR_SETTINGS))
   {
-    CarSettings* toOpen = new CarSettings();
+    CarSettings* toOpen = new CarSettings(m_cars);
     m_openWindows.insert(Windows::CAR_SETTINGS, toOpen);
     connect(toOpen, &CarSettings::destroyed, this, &MainMenu::carSettingsClosed);
+
+    toOpen->resize(658, 480); //TEMP until resize algo based on team/cars is established
     toOpen->show();
   } //end  if (!m_openWindows.contains(Windows::CAR_SETTINGS))
   else
@@ -298,4 +304,82 @@ void MainMenu::tmrSecondTimerTimeoutHandler()
 
   //set timer to one less than it currently is
   m_ui->lcdTimer->display(m_ui->lcdTimer->value() - 1);
+}
+void MainMenu::matchSettingsUpdateHandler()
+{
+  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+  {
+    cout << "INFO: MainMenu: recieved match settings update signal" << endl;
+  } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ALL_INFO)
+
+  //------------------------------------------------------------------------------------
+  //modify the car settings vector as appropriate to accomadate new/removed teams
+  //------------------------------------------------------------------------------------
+  if (m_cars->size() < MatchOptions::m_numberOfTeams)
+  {
+    //not enough teams
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+    {
+      cout << "INFO: MainMenu: not enough teams, adding more" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+    while (m_cars->size() < MatchOptions::m_numberOfTeams)
+    {
+      Team_t toAdd;
+      for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
+      {
+        toAdd.push_back(std::make_shared<CarOptions>(m_cars->size()));
+      }
+      m_cars->push_back(toAdd);
+    } //end  while (m_cars->size() < MatchOptions::m_numberOfTeams)
+  } //end  if (m_cars < MatchOptions::m_numberOfTeams)
+  else if (m_cars->size() > MatchOptions::m_numberOfTeams)
+  {
+    //too many teams
+    if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+    {
+      cout << "INFO: MainMenu: too many teams, removing the extra ones" << endl;
+    } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+    int teamsToRemove = m_cars->size() - MatchOptions::m_numberOfTeams;
+    for (int i = 0; i < teamsToRemove; i++)
+    {
+      m_cars->removeLast();
+    } //end  for (int i = 0; i < teamsToRemove; i++)
+  } //end  else if (m_cars->size() > MatchOptions::m_numberOfTeams)
+
+  int index = 0;
+  for (auto& team : (*m_cars))
+  {
+    if (team.size() > MatchOptions::m_carsPerTeam)
+    {
+      //too many cars on this team
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+      {
+        cout << "INFO: MainMenu: too many cars on team " << team[0]->getTeam() 
+             << " removing extra" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+
+      while (team.size() > MatchOptions::m_carsPerTeam)
+      {
+        team.removeLast();
+      } //end  while (teams.size() > MatchOptions::m_carsPerTeam)
+    } //end  if (team.size() > MatchOptions::m_carsPerTeam)
+    else if (team.size() < MatchOptions::m_carsPerTeam)
+    {
+      //not enough cars on this team
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::USER_INFO)
+      {
+        cout << "INFO: MainMenu: not enough cars on team " << team[0]->getTeam()
+             << " adding cars" << endl;
+      }
+
+      while (team.size() < MatchOptions::m_carsPerTeam)
+      {
+        std::shared_ptr<CarOptions> toAdd = std::make_shared<CarOptions>(index);
+        team.push_back(toAdd);
+      }
+    } //end  else if (team.size() < MatchOptions::m_carsPerTeam)
+    index++;
+  } //end  for (auto& team : m_cars)
 }

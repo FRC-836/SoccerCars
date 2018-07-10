@@ -10,6 +10,7 @@
 #include <qmap.h>
 #include <qevent.h>
 #include <qmessagebox.h>
+#include <qvector.h>
 
 #include "ui_MainMenu.h"
 #include "CmdOptions.h"
@@ -17,6 +18,8 @@
 #include "MatchSettings.h"
 #include "Diagnostics.h"
 #include "CarSettings.h"
+#include "CarOptions.h"
+#include "UsefulTypes.h"
 
 class MainMenu : public QMainWindow
 {
@@ -38,6 +41,7 @@ private:
   QPointer<QTimer> m_tmrSecondTimer;
   std::unique_ptr<QMediaPlayer> m_mediaPlayer;
   QMap<Windows, QWidget*> m_openWindows;
+  std::shared_ptr<TeamList_t> m_cars;
   bool m_matchRunning;
 
   //private functions
@@ -74,6 +78,7 @@ public slots:
   void btnDiagnosticsClickHandler();
   void tmrMatchTimerTimeoutHandler();
   void tmrSecondTimerTimeoutHandler();
+  void matchSettingsUpdateHandler();
 };
 
 #endif

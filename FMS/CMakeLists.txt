@@ -51,6 +51,8 @@ set(src src/main.cpp
         src/StopCar.cpp
         src/CmdOptions.cpp
         src/MatchOptions.cpp
+        src/CarOptionsWidget.cpp
+        src/CarOptions.cpp
         )
         
 set(inc inc/CarSettings.h
@@ -60,6 +62,9 @@ set(inc inc/CarSettings.h
         inc/StopCar.h
         inc/CmdOptions.h
         inc/MatchOptions.h
+        inc/CarOptionsWidget.h
+        inc/CarOptions.h
+        inc/UsefulTypes.h
         )
         
 set(forms inc/CarSettings.ui
@@ -67,6 +72,7 @@ set(forms inc/CarSettings.ui
           inc/MainMenu.ui
           inc/MatchSettings.ui
           inc/StopCar.ui
+          inc/CarOptionsWidget.ui
           )
 
 #setup inc as a valid include directory

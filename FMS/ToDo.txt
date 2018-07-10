@@ -20,4 +20,24 @@ probably should add checks to stop the user from opening certain windows while a
 
 change size of message box warning about closing FMS while match is running to make it wider
 
-fix bug where closing the match settings window always things theare aren't any unsaved changes, even if there are
+go through all output and make sure car name is being used where appropriate
+  should only need to check CarOptions, MatchOptions, and MatchSettings
+  
+disable up and down team button when they are unable to be used
+get rid of top and left numbers in car options grid
+
+set default size to height: 480, width: 658
+
+add protection from setting controller or team too high (based on MatchOptions)
+set minimum number of teams to 2 in the UI file for MatchSettings
+
+investigate if cars can be set to a team that doesn't exist on construction (i.e. construct a car on team 3 even if there are only 2 teams)
+
+set minimum size for cells im the CarSettings UI
+  this should be done by setting the appropriate functions for CarOptionsWidget
+    size hint
+    min size
+
+switch the order of rows in the car settings window. the lowest team should be on the bottom
+
+add controller incrementing and initialization for new cars created when the team settings change
