@@ -14,6 +14,7 @@ set (CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_OPTIONS -o inc/)
+set(CMAKE_AUTORCC ON)
 
 #Find the QtWidgets library
 find_package(Qt5Widgets REQUIRED)

@@ -37,7 +37,7 @@ void MainMenu::stopMatch(bool hasWinner)
   m_ui->lcdTimer->display(0);
 
   //TODO: make this more permanent buzzer playing sound (also find different sound bite)
-  m_mediaPlayer->setMedia(QUrl::fromLocalFile("C:/Users/Cheeto/Robotics/FRC/RocketLeagueCars/Code/FMS/res/alarm-buzzer.mp3"));
+  m_mediaPlayer->setMedia(QUrl("qrc:/sounds/alarm-buzzer.mp3"));
   m_mediaPlayer->setVolume(100); //TODO: make configurable setting
   m_mediaPlayer->play();
 
