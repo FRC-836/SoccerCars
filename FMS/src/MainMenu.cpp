@@ -36,8 +36,14 @@ void MainMenu::stopMatch(bool hasWinner)
   //clear the timer value
   m_ui->lcdTimer->display(0);
 
-  //TODO: make this more permanent buzzer playing sound (also find different sound bite)
-  m_mediaPlayer->setMedia(QUrl::fromLocalFile("C:/Users/Cheeto/Robotics/FRC/RocketLeagueCars/Code/FMS/res/alarm-buzzer.mp3"));
+  if (hasWinner)
+  {
+    m_mediaPlayer->setMedia(QUrl("qrc:/MatchEnd"));
+  } //end  if (hasWinner)
+  else
+  {
+    m_mediaPlayer->setMedia(QUrl("qrc:/MatchFault"));
+  } //end  else
   m_mediaPlayer->setVolume(100); //TODO: make configurable setting
   m_mediaPlayer->play();
 
@@ -57,6 +63,11 @@ void MainMenu::startMatch()
   //start the timers
   m_tmrMatchTimer->start(MatchOptions::m_seconds * 1000);
   m_tmrSecondTimer->start(1000);
+
+  //play match start sound
+  m_mediaPlayer->setMedia(QUrl("qrc:/MatchStartCharge")); //TODO: add ability to change to bell starting sound
+  m_mediaPlayer->setVolume(100); //TODO: make configurable setting
+  m_mediaPlayer->play();
 
   //this should be the last thing done in this function
   m_matchRunning = true;

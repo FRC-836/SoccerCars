@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+  <file alias="MatchFault">sounds/MatchCueSounds/Fault.wav</file>
+  <file alias="MatchEnd">sounds/MatchCueSounds/MatchEnd.wav</file>
+  <file alias="MatchStartBell">sounds/MatchCueSounds/MatchStartBell.wav</file>
+  <file alias="MatchStartCharge">sounds/MatchCueSounds/MatchStartCharge.wav</file>
+</qresource>
+</RCC>

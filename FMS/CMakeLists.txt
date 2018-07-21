@@ -14,6 +14,7 @@ set (CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOUIC_OPTIONS -o inc/)
+set(CMAKE_AUTORCC ON)
 
 #Find the QtWidgets library
 find_package(Qt5Widgets REQUIRED)
@@ -74,6 +75,8 @@ set(forms inc/CarSettings.ui
           inc/StopCar.ui
           inc/CarOptionsWidget.ui
           )
+set(resources res/resources.qrc
+              )
 
 #setup inc as a valid include directory
 include_directories(${CMAKE_SOURCE_DIR}/Inc
@@ -82,7 +85,7 @@ include_directories(${CMAKE_SOURCE_DIR}/Inc
                     )
                     
 #create executable
-add_executable(${PROJECT_NAME} ${src} ${inc} ${forms})
+add_executable(${PROJECT_NAME} ${src} ${inc} ${forms} ${resources})
 
 #use the widgets moduole from Qt 5
 target_link_libraries(${PROJECT_NAME} OutputManager_Qt
