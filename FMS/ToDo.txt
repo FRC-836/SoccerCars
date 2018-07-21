@@ -44,3 +44,5 @@ add controller incrementing and initialization for new cars created when the tea
 
 make more refactor-friendly by replacing local types with auto and using decletype where possible
   auto should only be used for locals, not return types or members
+  
+there is currently a ~3 second delay between starting the audio file and it actually playing
