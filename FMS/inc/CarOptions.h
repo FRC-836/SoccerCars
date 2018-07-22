@@ -8,6 +8,8 @@ class CarOptions
 {
 private:
   static int defaultCarNameNum;
+  static QMap<int, bool> controllersUsed;
+
   //member data
   unsigned int m_team;
   unsigned int m_controller;
