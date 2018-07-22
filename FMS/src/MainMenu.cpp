@@ -339,7 +339,7 @@ void MainMenu::matchSettingsUpdateHandler()
       Team_t toAdd;
       for (int i = 0; i < MatchOptions::m_carsPerTeam; i++)
       {
-        toAdd.push_back(std::make_shared<CarOptions>(m_cars->size()));
+        toAdd.push_back(std::make_shared<CarOptions>(m_cars->size(), m_cars->size() * MatchOptions::m_carsPerTeam + i));
       }
       m_cars->push_back(toAdd);
     } //end  while (m_cars->size() < MatchOptions::m_numberOfTeams)

@@ -3,6 +3,7 @@
 extern OutputManager cout;
 
 int CarOptions::defaultCarNameNum = 0;
+QMap<int, bool> CarOptions::controllersUsed;
 
 //private functions
 void CarOptions::init(unsigned int team, unsigned int controller, const QString& name)
@@ -93,7 +94,21 @@ void CarOptions::setController(unsigned int controller)
 {
   if (controller >= 0)
   {
+    if (controllersUsed[controller])
+    {
+      if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+      {
+        cout << "ERROR: CarOptions: Trying to set controller to one that is already used, "
+             << "assigning a default unused conroller" << endl;
+      } //end  if (CmdOptions::verbosity >= CmdOptions::DEBUG_LEVEL::ERRORS_ONLY)
+      controller = 1;
+      while (controllersUsed[controller])
+      {
+        controller++;
+      } //end  while (controllersUsed[controller])
+    }
     m_controller = controller;
+    controllersUsed[controller] = true;
   } //end  if (controller >= 0)
   else
   {
